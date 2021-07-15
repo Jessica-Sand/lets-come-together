@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -96,6 +98,28 @@ class User
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="users")
+     */
+    private $Instruments;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="users")
+     */
+    private $Genres;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Locations;
+
+    public function __construct()
+    {
+        $this->Instruments = new ArrayCollection();
+        $this->Genres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -290,6 +314,66 @@ class User
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Instrument[]
+     */
+    public function getInstruments(): Collection
+    {
+        return $this->Instruments;
+    }
+
+    public function addInstrument(Instrument $instrument): self
+    {
+        if (!$this->Instruments->contains($instrument)) {
+            $this->Instruments[] = $instrument;
+        }
+
+        return $this;
+    }
+
+    public function removeInstrument(Instrument $instrument): self
+    {
+        $this->Instruments->removeElement($instrument);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Genre[]
+     */
+    public function getGenres(): Collection
+    {
+        return $this->Genres;
+    }
+
+    public function addGenre(Genre $genre): self
+    {
+        if (!$this->Genres->contains($genre)) {
+            $this->Genres[] = $genre;
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): self
+    {
+        $this->Genres->removeElement($genre);
+
+        return $this;
+    }
+
+    public function getLocations(): ?Location
+    {
+        return $this->Locations;
+    }
+
+    public function setLocations(?Location $Locations): self
+    {
+        $this->Locations = $Locations;
 
         return $this;
     }
