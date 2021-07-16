@@ -21,13 +21,13 @@ class RegistrationFormType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('email')
-            // ->add('gender', ChoiceType::class, [
-            //     'choices' => [
-            //         'Monsieur' => 'Monsieur',
-            //         'Femme' => 'Femme',
-            //         'Autre' => 'Autre'
-            //     ]
-            // ])
+            ->add('gender', ChoiceType::class, [
+                'choices' => [
+                    'Homme' => 'Homme',
+                    'Femme' => 'Femme',
+                    'Autre' => 'Autre'
+                ]
+            ])
             ->add('pseudo')
             ->add('age')
             ->add('bio')

@@ -279,6 +279,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setGender(string $gender): self
     {
+        if (!in_array($gender, array('Homme', 'Femme', 'Autre'))) {
+            throw new \InvalidArgumentException("Invalid type");
+        }
+
         $this->gender = $gender;
 
         return $this;
