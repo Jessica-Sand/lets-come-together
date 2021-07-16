@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -60,7 +62,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $age;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", columnDefinition="ENUM('Homme', 'Femme', 'Autre')")
      */
     private $gender;
 
@@ -127,6 +129,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->created_at = new DateTimeImmutable();
+        $this->updated_at = new DateTime();
         $this->Instruments = new ArrayCollection();
         $this->Genres = new ArrayCollection();
     }
