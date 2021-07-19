@@ -55,25 +55,61 @@ class GenreController extends AbstractController
 
     /**
      * @Route("/{id}", name="show")
+     * @return void
      */
-    public function show(): Response
+    public function show(int $id, GenreRepository $genreRepository)
     {
-        return $this->render('admin/genre/show.html.twig');
+        $genre = $genreRepository->find($id);
+
+        return $this->render('admin/genre/show.html.twig', [
+            'genre' =>$genre
+        ]);
     }
 
     /**
-     * @Route("/edit", name="edit")
+     * @Route("/{id}/edit", name="edit")
+     * @return void
      */
-    public function edit(): Response
+    public function edit(Genre $genre, Request $request): Response
     {
-        return $this->render('admin/genre/edit.html.twig');
+        $form = $this->createForm(GenreType::class, $genre);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $this->addFlash('success', 'Le style de musique ' . $genre->getName() . ' a bien été mis à jour');
+            return $this->redirectToRoute('admin_genre_show', ['id' => $genre->getId()]);
+        }
+        return $this->render('admin/genre/edit.html.twig', [
+            'form' => $form->createView(),
+            'genre' => $genre
+        ]);
     }
 
     /**
      * @Route("/delete", name="delete")
+     * @return void
      */
-    public function delete(): Response
+    public function delete(int $id, GenreRepository $genreRepository, Request $request)
     {
-        return $this->render('admin/genre/delete.html.twig');
+        $submittedToken = $request->get('token');
+
+        if ($this->isCsrfTokenValid('delete-genre', $submittedToken)) {
+            $genreToDelete = $genreRepository->find($id);
+            $genreName = $genreToDelete->getName();
+            if ($genreToDelete  === null) {
+                throw $this->createNotFoundException('La ressource demandée n\'existe pas');
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($genreToDelete);
+            $em->flush();
+
+            $this->addFlash('success', 'Le style musicale ' . $genreName . ' a bien été supprimée');
+            return $this->redirectToRoute('admin_genre_list');
+        } else {
+            return new Response('Action interdite', 403);
+        }
     }
 }

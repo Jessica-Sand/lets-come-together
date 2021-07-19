@@ -1,4 +1,4 @@
-{% extends "admin/layout.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block title %}
 	{{genre.name}}
@@ -6,7 +6,18 @@
 	{{ parent() }}
 {% endblock %}
 
-{% block content %}
+{% block body %}
+<section class="text-center container">
+	<div class="row">
+		<div class="col-lg-6 col-md-8 mx-auto mb-4">
+			<h1 class="fw-light">
+				{{genre.name}} 
+                <a href="{{ path('admin_genre_edit', {id:genre.id}) }}" class="btn btn-outline-success">Editer</a>
+			</h1>
+		</div>
+	</div>
+</section>
+
 <div class="py-3 bg-light">
 	<div class="container">
 		<p>
