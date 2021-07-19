@@ -1,0 +1,17 @@
+{% extends "admin/layout.html.twig" %}
+
+{% block title %}
+	{{genre.name}}
+	-
+	{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<div class="py-3 bg-light">
+	<div class="container">
+		<p>
+			<a href="{{path('admin_genre_list')}}">Retour à la liste</a>
+		</p>
+	</div>
+</div>
+{% endblock %}

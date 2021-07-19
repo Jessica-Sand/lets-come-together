@@ -2,13 +2,16 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Genre;
+use App\Form\Type\GenreType;
 use App\Repository\GenreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/genre", name="admin_genre_")
+ * @Route("/admin/genre", name="admin_genre_", requirements={"index" = "\d+"})
  */
 class GenreController extends AbstractController
 {
@@ -24,14 +27,34 @@ class GenreController extends AbstractController
 
     /**
      * @Route("/add", name="add")
+     * @return void
      */
-    public function add(): Response
+    public function add(Request $request): Response
     {
-        return $this->render('admin/genre/add.html.twig');
+        $genre = new Genre();
+
+        $form = $this->createForm(GenreType::class, $genre);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // dd($genre);
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($genre);
+            $em->flush();
+
+            // Flash message
+            $this->addFlash('info', 'Le style de musique ' . $genre->getName() . ' a bien été créée');
+            return $this->redirectToRoute('admin_genre_list');
+        }
+
+        return $this->render('admin/genre/add.html.twig', [
+            'form' => $form->createView(),
+        ]);  
     }
 
     /**
-     * @Route("/show", name="show")
+     * @Route("/{id}", name="show")
      */
     public function show(): Response
     {

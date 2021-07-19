@@ -8,11 +8,11 @@
 {% block body %}
     <section class="text-center container">
 		<div class="row">
-			<div class="col-lg-6 col-md-8 mx-auto">
+			<div class="col-lg-6 col-md-8 mx-auto mb-4">
 				<h1 class="fw-light">
 					Style de musique
 					<small class="fs-5">
-						<a href="{{ path('admin_genre_add') }}">Nouveau style de musique</a>
+						<a href="{{ path('admin_genre_add') }}" class="btn btn-success">Ajouter</a>
 					</small>
 				</h1>
 			</div>
@@ -36,13 +36,13 @@
 						<td>{{genre.id}}</td>
 						<td>{{genre.name}}</td>
 						<td>
-							<a href="{{ path('admin_genre_show', {id:genre.id}) }}" class="btn btn-sm btn-outline-secondary">Voir</a>
+							<a href="{{ path('admin_genre_show', {id:genre.id}) }}" class="btn btn-outline-success">Voir</a>
 						</td>
 						<td>
-							<a href="{{ path('admin_genre_edit', {id:genre.id}) }}" class="btn btn-success">Editer</a>
+							<a href="{{ path('admin_genre_edit', {id:genre.id}) }}" class="btn btn-outline-success">Editer</a>
 						</td>
 						<td>
-							<a href="{{ path('admin_genre_delete', {id:genre.id, token:csrf_token('delete-item')}) }}" class="btn btn-sm btn-outline-secondary">Supprimer</a>
+							<a href="{{ path('admin_genre_delete', {id:genre.id, token:csrf_token('delete-item')}) }}" class="btn btn-outline-danger">Supprimer</a>
 						</td>
 					</tr>
 				{% endfor %}
