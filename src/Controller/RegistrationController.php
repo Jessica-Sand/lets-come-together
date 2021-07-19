@@ -26,7 +26,7 @@ class RegistrationController extends AbstractController
         if (count($errors) > 0) {
             return $this->json(
                 [
-                    'message' => 'Erreur lors de l\'envoi du formulaire'
+                    'message' => $errors
                 ],
                 500
             );

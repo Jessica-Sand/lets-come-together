@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=LocationRepository::class)
@@ -24,12 +25,14 @@ class Location
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\NotBlank(message="Merci de choisir une ville valide")
+     * @Groups({"User"})
+     * @Assert\NotBlank(message="Veuillez renseigner votre Localisation")
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"User"})
      */
     private $number;
 
