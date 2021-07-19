@@ -15,11 +15,11 @@ class GenreType extends AbstractType
         $builder
             ->add('name', null, [
                 'label' => 'Nom du style de musique'
-            ]);
+            ])
             // Validation button
-        $builder->add('save', SubmitType::class, [
-            'label' => 'Valider',
-        ]);
+            ->add('save', SubmitType::class, [
+                'label' => 'Valider',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

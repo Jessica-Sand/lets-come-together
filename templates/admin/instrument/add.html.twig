@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Instrument de musique |
+    {{ parent() }} 
+{% endblock %}
+
+{% block body %}
+<section class="text-center container">
+	<div class="row">
+		<div class="col-lg-6 col-md-8 mx-auto mb-4">
+			<h1 class="fw-light">
+				Nouvelle instrument de musique
+			</h1>
+		</div>
+	</div>
+</section>
+
+<div class="container">
+    {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+</div>
+{% endblock %}
