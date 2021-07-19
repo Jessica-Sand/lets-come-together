@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LocationRepository::class)
@@ -23,6 +24,7 @@ class Location
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank(message="Merci de choisir une ville valide")
      */
     private $name;
 
@@ -55,7 +57,7 @@ class Location
 
     public function __toString()
     {
-        return $this->name;
+        return $this->name . '' . $this->number;
     }
 
     public function getId(): ?int
