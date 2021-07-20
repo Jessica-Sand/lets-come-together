@@ -36,6 +36,11 @@ class Instrument
      */
     private $icone;
 
+     /**
+     * @ORM\Column(type="string", length=80, nullable=true)
+     */
+    private $imageurl;
+
     /**
      * @ORM\Column(type="datetime_immutable")
      */
@@ -89,6 +94,18 @@ class Instrument
     public function setIcone(string $icone): self
     {
         $this->icone = $icone;
+
+        return $this;
+    }
+
+    public function getImageurl(): ?string
+    {
+        return $this->imageurl;
+    }
+
+    public function setImageurl(?string $imageurl): self
+    {
+        $this->imageurl = $imageurl;
 
         return $this;
     }
