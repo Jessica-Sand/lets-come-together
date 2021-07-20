@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -22,67 +24,85 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"User"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"User"})
+     * @Assert\NotBlank(message="Veuiller renseigner votre Prénom")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"User"})
+     * @Assert\NotBlank(message="Veuillez renseigner votre Nom")
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
+     * @Groups({"User", "instruments"})
+     * @Assert\NotBlank(message="Veuillez renseiger votre Pseudonyme")
      */
     private $pseudo;
 
     /**
      * @ORM\Column(type="string", length=150, unique=true)
+     * @Groups({"User"})
+     * @Assert\NotBlank(message="Veuillez renseigner votre Email")
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups({"User"})
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Veuillez renseigner votre Mot de Passe")
      */
     private $password;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
+     * @Groups({"User"})
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", columnDefinition="ENUM('Homme', 'Femme', 'Autre')")
+     * @Groups({"User"})
+     * @Assert\NotBlank(message="Veuillez renseigner votre sexe")
      */
     private $gender;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"User"})
      */
     private $influence;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"User"})
      */
     private $availability;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
+     * @Groups({"User"})
      */
     private $experience;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups({"User"})
      */
     private $bio;
 
@@ -93,11 +113,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"User"})
      */
     private $perimeter;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true)
+     * @Groups({"User"})
      */
     private $status;
 
@@ -113,17 +135,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="users")
+     * @Groups({"User"})
+     * @Assert\Valid
      */
     private $Instruments;
 
     /**
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="users")
+     * @Groups({"User"})
+     * @Assert\Valid
      */
     private $Genres;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="users")
+     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="users", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"User"})
+     * @Assert\Valid
      */
     private $Locations;
 
@@ -133,6 +161,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->updated_at = new DateTime();
         $this->Instruments = new ArrayCollection();
         $this->Genres = new ArrayCollection();
+        $this->status = "Actif";
     }
 
     public function getId(): ?int
@@ -360,7 +389,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus(): ?string
     {
         return $this->status;
     }
