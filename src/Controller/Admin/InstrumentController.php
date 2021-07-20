@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Instrument;
 use App\Form\Type\InstrumentType;
 use App\Repository\InstrumentRepository;
+use App\Service\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,41 +32,27 @@ class InstrumentController extends AbstractController
      * @Route("/add", name="add")
      * @return void
      */
-    public function add(Request $request, SluggerInterface $slugger): Response
+    public function add(Request $request, ImageUploader $imageUploader)
     {
         $instrument = new Instrument();
 
         $form = $this->createForm(InstrumentType::class, $instrument);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // dd($instrument);
 
-            $imageFile = $form->get('icone')->getData();
+            $newFileName = $imageUploader->upload($form, 'icone');
 
-            if ($imageFile) {
-                $orininalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $instrument->setIcone($newFileName);
 
-                $safeFilename = $slugger->slug($orininalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
-
-                try {
-                    $imageFile->move(
-                        $this->getParameter('image_directory'),
-                        $newFilename
-                    );
-                }catch (FileException $e) {
-                }
-
-                $instrument->setImageurl($newFilename);
-            }
             $em = $this->getDoctrine()->getManager();
-
             $em->persist($instrument);
             $em->flush();
-
-            // Flash message
-            $this->addFlash('info', 'Le style de musique ' . $instrument->getName() . ' a bien été créée');
+            
+            $this->addFlash('sucess', 'Instrument ajouté avec succès');
+            
             return $this->redirectToRoute('admin_instrument_list');
         }
 
