@@ -36,7 +36,9 @@
 					<tr>
 						<td>{{instrument.id}}</td>
 						<td>{{instrument.name}}</td>
-                        <td>{{instrument.icone}}</td>
+                        <td>
+							<img src="{{ asset('uploads/images/' ~ instrument.icone) }}">
+						</td>
 						<td>
 							<a href="{{ path('admin_instrument_show', {id:instrument.id}) }}" class="btn btn-outline-success">Voir</a>
 						</td>

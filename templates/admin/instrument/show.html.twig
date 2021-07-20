@@ -11,6 +11,7 @@
 	<div class="row">
 		<div class="col-lg-6 col-md-8 mx-auto mb-4">
 			<h1 class="fw-light">
+				<img src="{{ asset('uploads/images/' ~ instrument.icone) }}">
 				{{instrument.name}} 
                 <a href="{{ path('admin_instrument_edit', {id:instrument.id}) }}" class="btn btn-outline-success">Editer</a>
 			</h1>
