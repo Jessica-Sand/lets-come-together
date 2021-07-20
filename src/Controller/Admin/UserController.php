@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("list", name="list")
+     * @Route("/list", name="list")
      */
     public function list(): Response
     {
