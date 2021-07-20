@@ -29,3 +29,4 @@ class GenreType extends AbstractType
         ]);
     }
 }
+0
