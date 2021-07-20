@@ -33,8 +33,9 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordHasherInterface $passwordHasher, SerializerInterface $serializer, ValidatorInterface $validator): Response
     {
-
+        // recuperation of the UserData
         $JsonData = $request->getContent();
+
         $user = $serializer->deserialize($JsonData, User::class, 'json');
         dd($user);
         $errors = $validator->validate($user);
@@ -46,30 +47,21 @@ class RegistrationController extends AbstractController
                 500
             );
         }else{
-            if($user->getLocations() == $this->locationRepository->findOneBy(['id' => $user->getLocations()])){
-                return $this->json([
-                    'message' => 'c\'est good'
-                ],
-                200
-            );
-            }else{
-                return $this->json([
-                    'message' => 'c\'est pas good'
-                ],
-                500
-            );
-            }
+         
+            dd('toto');
             // $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
             // $entityManager = $this->getDoctrine()->getManager();
             // $entityManager->persist($user);
             // $entityManager->flush();
-            
+        
             // return $this->json(
             //     [
             //         'message' => 'L\'utilisateur ' . $user->getPseudo() . 'à bien été créer'
             //     ],
             //     201
             // );
+             
+            
         }
     }
 }

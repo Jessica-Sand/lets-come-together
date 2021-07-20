@@ -118,7 +118,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $perimeter;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50)
      * @Groups({"User"})
      */
     private $status;
@@ -134,21 +134,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $updated_at;
 
     /**
-     * @Assert\Valid
+     * @Assert\Count(
+     *      min = 1
+     *      minMessage = "L'utilisateur doit jouer au minimum d'un Instrument"
+     * )
      * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="users")
      * @Groups({"User"})
      */
     private $Instruments;
 
     /**
-     * @Assert\Valid
+     * @Assert\Count(
+     *      min = 1
+     *      minMessage = "L'utilisateur doit avoir au minimum 1 Style de musique"
+     * )
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="users")
      * @Groups({"User"})
      */
     private $Genres;
 
     /**
-     * @Assert\Valid
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="users", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"User"})
