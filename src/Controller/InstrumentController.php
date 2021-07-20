@@ -25,7 +25,7 @@ class InstrumentController extends AbstractController
     public function show($name, InstrumentRepository $instrumentRepository): Response
     {
         return $this->json($instrumentRepository->findOneBy(["name" => $name]), 200, [], [
-            'groups' => 'instruments'
+            'groups' => 'instruments_users'
         ]);
     }
 }

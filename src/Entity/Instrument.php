@@ -25,14 +25,13 @@ class Instrument
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"User", "instruments"})
+     * @Groups({"User", "instruments", "instruments_users"})
      * @Assert\NotBlank(message="Veuillez renseigner vos intruments joués")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"instruments"})
      */
     private $icone;
 
@@ -47,8 +46,8 @@ class Instrument
     private $updated_at;
 
     /**
+     * @Groups("instruments_users")
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="Instruments")
-     * @Groups({"instruments"})
      */
     private $users;
 

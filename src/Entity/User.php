@@ -44,7 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
-     * @Groups({"User", "instruments"})
+     * @Groups({"User", "instruments_users"})
      * @Assert\NotBlank(message="Veuillez renseiger votre Pseudonyme")
      */
     private $pseudo;
@@ -134,24 +134,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $updated_at;
 
     /**
+     * @Assert\Valid
      * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="users")
      * @Groups({"User"})
-     * @Assert\Valid
      */
     private $Instruments;
 
     /**
+     * @Assert\Valid
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="users")
      * @Groups({"User"})
-     * @Assert\Valid
      */
     private $Genres;
 
     /**
+     * @Assert\Valid
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="users", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"User"})
-     * @Assert\Valid
      */
     private $Locations;
 

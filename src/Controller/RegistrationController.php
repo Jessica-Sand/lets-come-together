@@ -31,6 +31,7 @@ class RegistrationController extends AbstractController
                 500
             );
         }else{
+            
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
