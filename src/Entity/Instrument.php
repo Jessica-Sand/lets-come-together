@@ -35,11 +35,6 @@ class Instrument
      */
     private $icone;
 
-     /**
-     * @ORM\Column(type="string", length=80, nullable=true)
-     */
-    private $imageurl;
-
     /**
      * @ORM\Column(type="datetime_immutable")
      */

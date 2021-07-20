@@ -20,7 +20,7 @@ class InstrumentController extends AbstractController
     }
 
     /**
-     * @Route("/instruments/{name}", name="instruments_show", methods={"GET"})
+     * @Route("/instruments/{name}", name="instruments_users", methods={"GET"})
      */
     public function show($name, InstrumentRepository $instrumentRepository): Response
     {

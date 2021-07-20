@@ -30,28 +30,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"User"})
+     * @Groups({"User""})
      * @Assert\NotBlank(message="Veuiller renseigner votre Prénom")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"User"})
+     * @Groups({"User""})
      * @Assert\NotBlank(message="Veuillez renseigner votre Nom")
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
-     * @Groups({"User", "instruments_users"})
+     * @Groups({"User", "instruments_users", "Genres_User", "Locations_Users""})
      * @Assert\NotBlank(message="Veuillez renseiger votre Pseudonyme")
      */
     private $pseudo;
 
     /**
      * @ORM\Column(type="string", length=150, unique=true)
-     * @Groups({"User"})
+     * @Groups({"User""})
      * @Assert\NotBlank(message="Veuillez renseigner votre Email")
      */
     private $email;
@@ -66,43 +66,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      * @ORM\Column(type="string", length=100)
      * @Assert\NotBlank(message="Veuillez renseigner votre Mot de Passe")
+     * @Groups({"register"})
      */
     private $password;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"User"})
+     * @Groups({"User""})
      */
     private $age;
 
     /**
      * @ORM\Column(type="string", columnDefinition="ENUM('Homme', 'Femme', 'Autre')")
-     * @Groups({"User"})
+     * @Groups({"User""})
      * @Assert\NotBlank(message="Veuillez renseigner votre sexe")
      */
     private $gender;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"User"})
+     * @Groups({"User""})
      */
     private $influence;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"User"})
+     * @Groups({"User""})
      */
     private $availability;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
-     * @Groups({"User"})
+     * @Groups({"User""})
      */
     private $experience;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Groups({"User"})
+     * @Groups({"User""})
      */
     private $bio;
 
@@ -113,7 +114,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"User"})
+     * @Groups({"User""})
      */
     private $perimeter;
 
@@ -136,14 +137,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @Assert\Valid
      * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="users")
-     * @Groups({"User"})
+     * @Groups({"User""})
      */
     private $Instruments;
 
     /**
      * @Assert\Valid
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="users")
-     * @Groups({"User"})
+     * @Groups({"User""})
      */
     private $Genres;
 
