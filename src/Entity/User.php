@@ -135,7 +135,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @Assert\Count(
-     *      min = 1
+     *      min = 1,
      *      minMessage = "L'utilisateur doit jouer au minimum d'un Instrument"
      * )
      * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="users")
@@ -144,8 +144,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $Instruments;
 
     /**
+     * @Assert\NotNull
+     * @Assert\NotBlank
      * @Assert\Count(
-     *      min = 1
+     *      min = 1,
      *      minMessage = "L'utilisateur doit avoir au minimum 1 Style de musique"
      * )
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="users")
