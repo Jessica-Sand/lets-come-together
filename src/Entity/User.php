@@ -76,7 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $age;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('Homme', 'Femme', 'Autre')")
+     * @ORM\Column(type="string")
      * @Groups({"User"})
      * @Assert\NotBlank(message="Veuillez renseigner votre sexe")
      */
@@ -118,7 +118,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $perimeter;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="boolean")
      * @Groups({"User"})
      */
     private $status;
@@ -161,7 +161,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->updated_at = new DateTime();
         $this->Instruments = new ArrayCollection();
         $this->Genres = new ArrayCollection();
-        $this->status = "Actif";
+        $this->status = true;
     }
 
     public function getId(): ?int
