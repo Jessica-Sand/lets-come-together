@@ -25,7 +25,7 @@ class Genre
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"User"})
+     * @Groups({"User", "Genres", "Genres_User"})
      * @Assert\NotBlank(message="Veuillez renseigner vos styles de musiques")
      */
     private $name;
@@ -42,6 +42,7 @@ class Genre
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="Genres")
+     * @Groups({"Genres_User"})
      */
     private $users;
 

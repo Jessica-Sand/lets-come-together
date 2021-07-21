@@ -37,6 +37,7 @@ class RegistrationController extends AbstractController
         $JsonData = $request->getContent();
 
         $user = $serializer->deserialize($JsonData, User::class, 'json');
+        dd($user);
         $errors = $validator->validate($user);
         if (count($errors) > 0) {
             return $this->json(
@@ -46,18 +47,20 @@ class RegistrationController extends AbstractController
                 500
             );
         }else{
+
             dd($user);
-            $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+         
+            // $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
+            // $entityManager = $this->getDoctrine()->getManager();
+            // $entityManager->persist($user);
+            // $entityManager->flush();
         
-            return $this->json(
-                [
-                    'message' => 'L\'utilisateur ' . $user->getPseudo() . 'à bien été créer'
-                ],
-                201
-            );
+            // return $this->json(
+            //     [
+            //         'message' => 'L\'utilisateur ' . $user->getPseudo() . 'à bien été créer'
+            //     ],
+            //     201
+            // );
              
             
         }
