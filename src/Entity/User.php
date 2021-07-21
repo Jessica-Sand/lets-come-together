@@ -44,7 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
-     * @Groups({"User", "instruments"})
+     * @Groups({"User", "instruments_users", "Genres_User", "Locations_Users"})
      * @Assert\NotBlank(message="Veuillez renseiger votre Pseudonyme")
      */
     private $pseudo;
@@ -76,7 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $age;
 
     /**
-     * @ORM\Column(type="string", columnDefinition="ENUM('Homme', 'Femme', 'Autre')")
+     * @ORM\Column(type="string")
      * @Groups({"User"})
      * @Assert\NotBlank(message="Veuillez renseigner votre sexe")
      */
@@ -118,7 +118,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $perimeter;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="boolean")
      * @Groups({"User"})
      */
     private $status;
@@ -134,16 +134,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $updated_at;
 
     /**
+     * @Assert\Count(
+     *      min = 1,
+     *      minMessage = "L'utilisateur doit jouer au minimum d'un Instrument"
+     * )
      * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="users")
      * @Groups({"User"})
-     * @Assert\Valid
      */
     private $Instruments;
 
     /**
+     * @Assert\NotNull
+     * @Assert\NotBlank
+     * @Assert\Count(
+     *      min = 1,
+     *      minMessage = "L'utilisateur doit avoir au minimum 1 Style de musique"
+     * )
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="users")
      * @Groups({"User"})
-     * @Assert\Valid
      */
     private $Genres;
 
@@ -151,7 +159,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="users", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"User"})
-     * @Assert\Valid
      */
     private $Locations;
 
@@ -161,7 +168,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->updated_at = new DateTime();
         $this->Instruments = new ArrayCollection();
         $this->Genres = new ArrayCollection();
-        $this->status = "Actif";
+        $this->status = true;
     }
 
     public function getId(): ?int
@@ -389,12 +396,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): ?bool
     {
         return $this->status;
     }
 
-    public function setStatus(?int $status): self
+    public function setStatus(?bool $status): self
     {
         $this->status = $status;
 

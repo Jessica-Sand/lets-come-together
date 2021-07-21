@@ -25,21 +25,15 @@ class Instrument
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"User", "instruments"})
+     * @Groups({"User", "instruments", "instruments_users"})
      * @Assert\NotBlank(message="Veuillez renseigner vos intruments joués")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"instruments"})
      */
     private $icone;
-
-     /**
-     * @ORM\Column(type="string", length=80, nullable=true)
-     */
-    private $imageurl;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -52,8 +46,8 @@ class Instrument
     private $updated_at;
 
     /**
+     * @Groups("instruments_users")
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="Instruments")
-     * @Groups({"instruments"})
      */
     private $users;
 
@@ -94,18 +88,6 @@ class Instrument
     public function setIcone(string $icone): self
     {
         $this->icone = $icone;
-
-        return $this;
-    }
-
-    public function getImageurl(): ?string
-    {
-        return $this->imageurl;
-    }
-
-    public function setImageurl(?string $imageurl): self
-    {
-        $this->imageurl = $imageurl;
 
         return $this;
     }

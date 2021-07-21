@@ -20,12 +20,12 @@ class InstrumentController extends AbstractController
     }
 
     /**
-     * @Route("/instruments/{name}", name="instruments_show", methods={"GET"})
+     * @Route("/instruments/{name}", name="instruments_users", methods={"GET"})
      */
     public function show($name, InstrumentRepository $instrumentRepository): Response
     {
         return $this->json($instrumentRepository->findOneBy(["name" => $name]), 200, [], [
-            'groups' => 'instruments'
+            'groups' => 'instruments_users'
         ]);
     }
 }

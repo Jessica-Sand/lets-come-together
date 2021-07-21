@@ -25,14 +25,14 @@ class Location
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"User"})
+     * @Groups({"User", "Locations", "Locations_Users"})
      * @Assert\NotBlank(message="Veuillez renseigner votre Localisation")
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"User"})
+     * @Groups({"User", "Locations"})
      */
     private $number;
 
@@ -48,6 +48,7 @@ class Location
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="Locations")
+     * @Groups({"Locations_Users"})
      */
     private $users;
 
