@@ -36,6 +36,20 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    /**
+     * Method to find all the musiciens with satus active (true)
+     */
+    public function findAllActive()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT user
+            FROM App\Entity\User user
+            WHERE user.status = 1'
+        );
+        return $query->getResult();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

@@ -46,7 +46,7 @@ class RegistrationController extends AbstractController
                 500
             );
         }else{
-            dd($user);
+            // dd($user);
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -54,7 +54,7 @@ class RegistrationController extends AbstractController
         
             return $this->json(
                 [
-                    'message' => 'L\'utilisateur ' . $user->getPseudo() . 'à bien été créer'
+                    'message' => 'L\'utilisateur ' . $user->getPseudo() . ' à bien été créer'
                 ],
                 201
             );
