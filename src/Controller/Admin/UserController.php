@@ -46,4 +46,33 @@ class UserController extends AbstractController
             'user' => $user
         ]);
     }
+
+    /**
+     * @Route("/add", name="add")
+     * @return void
+     */
+    public function add(Request $request): Response
+    {
+        $user = new User();
+
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // dd($user);
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($user);
+            $em->flush();
+
+            // Flash message
+            $this->addFlash('info', 'L\'utilisateur ' . $user->getPseudo() . ' a bien été créée');
+            return $this->redirectToRoute('admin_user_list');
+        }
+
+        return $this->render('admin/user/add.html.twig', [
+            'form' => $form->createView(),
+        ]);  
+    }
+
 }
