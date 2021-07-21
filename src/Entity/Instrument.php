@@ -92,18 +92,6 @@ class Instrument
         return $this;
     }
 
-    public function getImageurl(): ?string
-    {
-        return $this->imageurl;
-    }
-
-    public function setImageurl(?string $imageurl): self
-    {
-        $this->imageurl = $imageurl;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->created_at;
