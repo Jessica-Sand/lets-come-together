@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/api/v1", name="api_v1_")
+ */
 class UserController extends AbstractController
 {
     /**
@@ -14,18 +17,16 @@ class UserController extends AbstractController
      */
     public function list(UserRepository $userRepository): Response
     {
-        return $this->json($userRepository->findAll(), 200, [], [
-            'groups' => 'User'
-        ]);
+        return $this->json($userRepository->findAllActive(), 200, [], [
+                'groups' => 'User',
+            ]);
     }
 
     /**
-     * @Route("/users/{username}", name="users", methods={"GET"})
+     * @Route("/users/{id}", name="users_show", methods={"GET"})
      */
     public function show($username, UserRepository $userRepository): Response
     {
-        $currentUser = $userRepository->findOneBy(['pseudo' => $username]);
-        dd($currentUser->getGenres());
         return $this->json($userRepository->findOneBy(['pseudo' => $username]), 200, [], [
             'groups' => 'User'
         ]);

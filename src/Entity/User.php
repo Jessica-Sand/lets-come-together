@@ -136,7 +136,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @Assert\Count(
      *      min = 1,
-     *      minMessage = "L'utilisateur doit jouer au minimum d'un Instrument"
+     *      minMessage = "L'utilisateur doit jouer au minimum d'un instrument"
      * )
      * @ORM\ManyToMany(targetEntity=Instrument::class, inversedBy="users")
      * @Groups({"User"})
@@ -148,7 +148,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\NotBlank
      * @Assert\Count(
      *      min = 1,
-     *      minMessage = "L'utilisateur doit avoir au minimum 1 Style de musique"
+     *      minMessage = "L'utilisateur doit avoir au minimum un style de musique"
      * )
      * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="users")
      * @Groups({"User"})
@@ -158,6 +158,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="users", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Veuillez renseigner un département existant")
      * @Groups({"User"})
      */
     private $Locations;

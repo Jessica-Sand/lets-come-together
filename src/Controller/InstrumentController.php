@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/api/v1", name="api_v1_")
+ */
 class InstrumentController extends AbstractController
 {
     /**
@@ -20,7 +23,7 @@ class InstrumentController extends AbstractController
     }
 
     /**
-     * @Route("/instruments/{name}", name="instruments_users", methods={"GET"})
+     * @Route("/instruments/{id}", name="instruments_users", methods={"GET"})
      */
     public function show($name, InstrumentRepository $instrumentRepository): Response
     {
