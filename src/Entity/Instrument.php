@@ -33,7 +33,7 @@ class Instrument
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $icone;
+    private $icon;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -80,14 +80,14 @@ class Instrument
         return $this;
     }
 
-    public function getIcone(): ?string
+    public function getIcon(): ?string
     {
-        return $this->icone;
+        return $this->icon;
     }
 
-    public function setIcone(string $icone): self
+    public function setIcon(string $icon): self
     {
-        $this->icone = $icone;
+        $this->icon = $icon;
 
         return $this;
     }

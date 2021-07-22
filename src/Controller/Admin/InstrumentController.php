@@ -43,9 +43,9 @@ class InstrumentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // dd($instrument);
 
-            $newFileName = $imageUploader->upload($form, 'icone');
+            $newFileName = $imageUploader->upload($form, 'icon');
 
-            $instrument->setIcone($newFileName);
+            $instrument->setIcon($newFileName);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($instrument);
