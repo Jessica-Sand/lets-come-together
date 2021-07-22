@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Musiciens |
+    {{ parent() }} 
+{% endblock %}
+
+{% block body %}
+<section class="text-center container">
+		<div class="row">
+			<div class="col-lg-6 col-md-8 mx-auto mb-4">
+				<h1 class="fw-light">
+					Musiciens enregistrés
+				</h1>
+			</div>
+		</div>
+	</section>
+
+<div class="container">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<td>#</td>
+					<td>Nom</td>
+                    <td>Status</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</thead>
+			<tbody>
+					<tr>
+						<td>{{user.id}}</td>
+						<td>{{user.pseudo}}</td>
+						<td>{{user.status}}</td>
+                        <td>
+                        {# {{ form(form) }}
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+                            </div>
+                        </td> #}
+						{{ form_start(form) }}
+							{% if user.status == 1 %}
+								<div class="form-check form-switch">
+									{{ form_widget(form.status, {'attr': {'checked': 'checked'}}) }}
+								</div>
+							{% else %}
+								<div class="form-check form-switch">
+									{{ form_widget(form.status) }}
+								</div>
+							{% endif %}
+							<button type="submit" class="btn btn-secondary">Valider</button>
+						{{ form_end(form) }}
+						
+					</tr>
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{instrument.name}}
+	-
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<section class="text-center container">
+	<div class="row">
+		<div class="col-lg-6 col-md-8 mx-auto mb-4">
+			<h1 class="fw-light">
+				<img src="{{ asset('uploads/images/' ~ instrument.icone) }}">
+				{{instrument.name}} 
+                <a href="{{ path('admin_instrument_edit', {id:instrument.id}) }}" class="btn btn-outline-success">Editer</a>
+			</h1>
+		</div>
+	</div>
+</section>
+
+<div class="py-3 bg-light">
+	<div class="container">
+		<p>
+			<a href="{{path('admin_instrument_list')}}">Retour à la liste</a>
+		</p>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Style de musique |
+    {{ parent() }} 
+{% endblock %}
+
+{% block body %}
+    <section class="text-center container">
+		<div class="row">
+			<div class="col-lg-6 col-md-8 mx-auto mb-4">
+				<h1 class="fw-light">
+					Style de musique
+					<small class="fs-5">
+						<a href="{{ path('admin_genre_add') }}" class="btn btn-success">Ajouter</a>
+					</small>
+				</h1>
+			</div>
+		</div>
+	</section>
+
+	<div class="container">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<td>#</td>
+					<td>Nom</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for genre in genres %}
+					<tr>
+						<td>{{genre.id}}</td>
+						<td>{{genre.name}}</td>
+						<td>
+							<a href="{{ path('admin_genre_show', {id:genre.id}) }}" class="btn btn-outline-success">Voir</a>
+						</td>
+						<td>
+							<a href="{{ path('admin_genre_edit', {id:genre.id}) }}" class="btn btn-outline-success">Editer</a>
+						</td>
+						<td>
+							<a href="{{ path('admin_genre_delete', {id:genre.id, token:csrf_token('delete-item')}) }}" class="btn btn-outline-danger">Supprimer</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
