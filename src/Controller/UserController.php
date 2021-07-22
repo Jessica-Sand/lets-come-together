@@ -24,8 +24,6 @@ class UserController extends AbstractController
      */
     public function show($username, UserRepository $userRepository): Response
     {
-        $currentUser = $userRepository->findOneBy(['pseudo' => $username]);
-        dd($currentUser->getGenres());
         return $this->json($userRepository->findOneBy(['pseudo' => $username]), 200, [], [
             'groups' => 'User'
         ]);
