@@ -18,7 +18,7 @@ class InstrumentType extends AbstractType
             ->add('name', null, [
                 'label' => 'Nom de l\'instrument de musique'
             ])
-            ->add('icone', FileType::class, [
+            ->add('icon', FileType::class, [
                 'label' => 'Téléverser une icone',
                 'mapped' => false,
                 'required' => false,
