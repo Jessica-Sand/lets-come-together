@@ -35,6 +35,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            dd($user);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'Lutilisateur ' . $user->getPseudo() . ' a bien été mis à jour');
@@ -73,6 +74,27 @@ class UserController extends AbstractController
         return $this->render('admin/user/add.html.twig', [
             'form' => $form->createView(),
         ]);  
+    }
+
+    /**
+     * @Route("/{id}/status", name="status_change")
+     *
+     * @return void
+     */
+    public function statusChange(User $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if ($user->getStatus() == 1) {
+            $user->setStatus(0);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_user_list', ['id' => $user->getId()]);
+        }else{
+            $user->setStatus(1);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_user_list', ['id' => $user->getId()]);
+        }
     }
 
 }
