@@ -23,11 +23,11 @@ class GenreController extends AbstractController
     }
 
     /**
-     * @Route("/genres/{name}", name="genres_users")
+     * @Route("/genres/{id}", name="genres_users")
      */
-    public function show($name, GenreRepository $genreRepository): Response
+    public function show($id, GenreRepository $genreRepository): Response
     {
-        return $this->json($genreRepository->findOneBy(['name' => $name]), 200, [], [
+        return $this->json($genreRepository->findOneBy(['id' => $id]), 200, [], [
             'groups' => 'Genres_User'
         ]);
     }

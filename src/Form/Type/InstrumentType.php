@@ -21,14 +21,13 @@ class InstrumentType extends AbstractType
             ->add('icon', FileType::class, [
                 'label' => 'Téléverser une icone',
                 'mapped' => false,
-                'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
                             'image/png'
                         ],
-                        'mimeTypesMessage' => 'veuillez ajouter une image valide',
+                        'mimeTypesMessage' => 'Veuillez ajouter une image valide',
                     ])
                 ]
             ])

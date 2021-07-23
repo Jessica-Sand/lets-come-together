@@ -25,9 +25,9 @@ class InstrumentController extends AbstractController
     /**
      * @Route("/instruments/{id}", name="instruments_users", methods={"GET"})
      */
-    public function show($name, InstrumentRepository $instrumentRepository): Response
+    public function show($id, InstrumentRepository $instrumentRepository): Response
     {
-        return $this->json($instrumentRepository->findOneBy(["name" => $name]), 200, [], [
+        return $this->json($instrumentRepository->findOneBy(["id" => $id]), 200, [], [
             'groups' => 'instruments_users'
         ]);
     }
