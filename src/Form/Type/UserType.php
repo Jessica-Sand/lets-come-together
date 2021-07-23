@@ -17,11 +17,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('status', CheckboxType::class, [
-                'label_attr' => [
-                'class' => 'form-switch',
-                ],
-            ])
+            ->add('status', CheckboxType::class)
             ->add('firstname')
             ->add('lastname')
             ->add('pseudo')

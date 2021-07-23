@@ -17,32 +17,31 @@
 	</section>
 
 <div class="container">
+	<div class="row">
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<td>#</td>
-					<td>Nom</td>
-                    <td>Status</td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td class="col-2">#</td>
+					<td class="col-5">Nom</td>
+					<td>Status</td>
 				</tr>
 			</thead>
 			<tbody>
 				{% for user in users %}
 					<tr>
-						<td>{{user.id}}</td>
-						<td>{{user.pseudo}}</td>
+						<td class="col-2">{{user.id}}</td>
+						<td class="col-5">{{user.pseudo}}</td>
                         <td>
-                    
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
-                            </div>
+							{% if user.status == 1 %}
+							<a href="{{ path('admin_user_status_change', {id:user.id}) }}">
+								<button type="button" class="btn btn-primary col-2">Actif</button>
+							</a>
+							{% else %}
+							<a href="{{ path('admin_user_status_change', {id:user.id}) }}">
+								<button type="button" class="btn btn-danger col-2">Inactif</button>
+							</a>
+							{% endif %}
                         </td>
-						<td>
-							<a href="{{ path('admin_user_edit', {id:user.id}) }}" class="btn btn-outline-success">Editer</a>
-						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
