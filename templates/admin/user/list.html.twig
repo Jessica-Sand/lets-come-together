@@ -30,14 +30,17 @@
 				{% for user in users %}
 					<tr>
 						<td class="col-2">{{user.id}}</td>
-						<td class="col-5">{{user.status}}</td>
+						<td class="col-5">{{user.pseudo}}</td>
                         <td>
-							<div class="form-check form-switch">
-								<a href="{{ path('admin_user_status_change', {id:user.id}) }}">
-									<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-								</a>
-								<label class="form-check-label" for="flexSwitchCheckChecked">Status</label>
-							</div>
+							{% if user.status == 1 %}
+							<a href="{{ path('admin_user_status_change', {id:user.id}) }}">
+								<button type="button" class="btn btn-primary col-2">Actif</button>
+							</a>
+							{% else %}
+							<a href="{{ path('admin_user_status_change', {id:user.id}) }}">
+								<button type="button" class="btn btn-secondary col-2">Inactif</button>
+							</a>
+							{% endif %}
                         </td>
 					</tr>
 				{% endfor %}

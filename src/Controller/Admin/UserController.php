@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -52,7 +53,7 @@ class UserController extends AbstractController
      * @Route("/add", name="add")
      * @return void
      */
-    public function add(Request $request): Response
+    public function add(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
 
@@ -60,7 +61,9 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($user);
+            
+            $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
+
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($user);
@@ -79,7 +82,7 @@ class UserController extends AbstractController
     /**
      * @Route("/{id}/status", name="status_change")
      *
-     * @return void
+     * Function for change the status of the User in the DataBase
      */
     public function statusChange(User $user)
     {
