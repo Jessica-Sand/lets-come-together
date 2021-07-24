@@ -25,9 +25,9 @@ class LocationController extends AbstractController
     /**
      * @Route("/locations/{id}", name="locations_users")
      */
-    public function show($name, LocationRepository $locationRepository): Response
+    public function show($id, LocationRepository $locationRepository): Response
     {
-        return $this->json($locationRepository->findOneBy(['name' => $name]), 200, [], [
+        return $this->json($locationRepository->findOneBy(['id' => $id]), 200, [], [
             'groups' => 'Locations_Users'
         ]);
     }
