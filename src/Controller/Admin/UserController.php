@@ -38,7 +38,7 @@ class UserController extends AbstractController
             dd($user);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            $this->addFlash('success', 'Lutilisateur ' . $user->getPseudo() . ' a bien été mis à jour');
+            $this->addFlash('success', 'L\'utilisateur ' . $user->getPseudo() . ' a bien été mis à jour');
             
         }
 

@@ -19,7 +19,7 @@ class AdminController extends AbstractController
      */
     public function index(GenreRepository $genreRepository, InstrumentRepository $instrumentRepository): Response
     {
-        return $this->render('admin/index.html.twig', [
+        return $this->render('admin/layout.html.twig', [
             'genres' => $genreRepository,
             'instruments' => $instrumentRepository
         ]);
