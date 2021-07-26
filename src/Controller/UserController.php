@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -38,8 +40,26 @@ class UserController extends AbstractController
     /**
      * @Route("/users/{id}/edit", name="users_edit", methods={"PUT|PATCH"})
      */
-    public function edit($id, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
+    public function edit(User $user, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
     {
-        
+       $jsonData = $request->getContent();
+
+       $user = $serializer->deserialize($jsonData, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
+
+       $errors = $validator->validate($user);
+
+       if(count($errors) == 0) {
+           // no error we can saved it in the entity
+           $this->getDoctrine()->getManager()->flush();
+
+           return $this->json([
+               'message' => 'Le compte à bien été mis à jour'
+           ]);
+        }
+
+        // if error
+        return $this->json([
+            'errors' => (string) $errors
+        ], 400);
     }
 }
