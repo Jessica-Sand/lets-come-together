@@ -161,6 +161,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $gender;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $cities;
+
     public function __construct()
     {
         $this->created_at = new DateTimeImmutable();
@@ -483,6 +489,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setGender(?Gender $gender): self
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getCities(): ?City
+    {
+        return $this->cities;
+    }
+
+    public function setCities(?City $cities): self
+    {
+        $this->cities = $cities;
 
         return $this;
     }

@@ -2,19 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\InstrumentRepository;
-use DateTime;
+use App\Repository\CityRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=InstrumentRepository::class)
+ * @ORM\Entity(repositoryClass=CityRepository::class)
  */
-class Instrument
+class City
 {
     /**
      * @ORM\Id
@@ -24,20 +21,12 @@ class Instrument
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     * @Groups({"User", "instruments", "instruments_users"})
-     * @Assert\NotBlank(message="Veuillez renseigner vos intruments joués")
+     * @ORM\Column(type="string", length=150)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(message="Veuillez ajouter une icone")
-     */
-    private $icon;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $created_at;
 
@@ -47,21 +36,14 @@ class Instrument
     private $updated_at;
 
     /**
-     * @Groups("instruments_users")
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="Instruments")
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="cities")
      */
     private $users;
 
     public function __construct()
     {
-        $this->created_at = new DateTimeImmutable();
-        $this->updated_at = new DateTime();
         $this->users = new ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return $this->name;
+        $this->created_at = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -77,18 +59,6 @@ class Instrument
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getIcon(): ?string
-    {
-        return $this->icon;
-    }
-
-    public function setIcon(string $icon): self
-    {
-        $this->icon = $icon;
 
         return $this;
     }
@@ -129,7 +99,7 @@ class Instrument
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addInstrument($this);
+            $user->setCities($this);
         }
 
         return $this;
@@ -138,7 +108,10 @@ class Instrument
     public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
-            $user->removeInstrument($this);
+            // set the owning side to null (unless already changed)
+            if ($user->getCities() === $this) {
+                $user->setCities(null);
+            }
         }
 
         return $this;
