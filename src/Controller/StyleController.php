@@ -16,9 +16,10 @@ class StyleController extends AbstractController
      * @Route("/styles", name="styles")
      */
     public function list(StyleRepository $styleRepository): Response
-    {
+    {   
+        
         return $this->json($styleRepository->findAll(), 200, [], [
-            'groups' => 'styles'
+            'groups' => 'Styles'
         ]);
     }
 
@@ -28,7 +29,7 @@ class StyleController extends AbstractController
     public function show($id, StyleRepository $styleRepository): Response
     {
         return $this->json($styleRepository->findOneBy(['id' => $id]), 200, [], [
-            'groups' => 'styles_User'
+            'groups' => 'Styles_User'
         ]);
     }
 }

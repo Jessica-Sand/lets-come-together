@@ -2,7 +2,9 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Gender;
 use App\Entity\Style;
+use App\Entity\User;
 use App\Entity\UserApp;
 use Faker;
 use Doctrine\Bundle\FixturesBundle\Fixture;

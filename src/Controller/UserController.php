@@ -40,6 +40,6 @@ class UserController extends AbstractController
      */
     public function edit($id, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
     {
-
+        
     }
 }
