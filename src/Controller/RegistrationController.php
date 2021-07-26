@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\InstrumentRepository;
-use App\Repository\LocationRepository;
+use App\Repository\DepartmentRepository;
 use App\Repository\StyleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,13 +17,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegistrationController extends AbstractController
 {
-    private $locationRepository;
+    private $departmentRepository;
     private $genreRepository;
     private $instrumentRepository;
 
-    public function __construct(LocationRepository $location, StyleRepository $genre, InstrumentRepository $instrument)
+    public function __construct(DepartmentRepository $department, StyleRepository $genre, InstrumentRepository $instrument)
     {
-        $this->locationRepository = $location;
+        $this->departmentRepository = $department;
         $this->genreRepository = $genre;
         $this->instrumentRepository = $instrument;
     }

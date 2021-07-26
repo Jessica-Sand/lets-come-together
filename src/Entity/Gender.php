@@ -2,19 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\LocationRepository;
-use DateTime;
-use DateTimeImmutable;
+use App\Repository\GenderRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity(repositoryClass=LocationRepository::class)
+ * @ORM\Entity(repositoryClass=GenderRepository::class)
  */
-class Location
+class Gender
 {
     /**
      * @ORM\Id
@@ -24,20 +20,12 @@ class Location
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     * @Groups({"User", "Locations", "Locations_Users"})
-     * @Assert\NotBlank(message="Veuillez renseigner votre Localisation")
+     * @ORM\Column(type="string", length=10)
      */
-    private $name;
+    private $text;
 
     /**
-     * @ORM\Column(type="integer")
-     * @Groups({"User", "Locations"})
-     */
-    private $number;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $created_at;
 
@@ -47,21 +35,13 @@ class Location
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="Locations")
-     * @Groups({"Locations_Users"})
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="gender")
      */
     private $users;
 
     public function __construct()
     {
-        $this->created_at = new DateTimeImmutable();
-        $this->updated_at = new DateTime();
         $this->users = new ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return $this->name . '' . $this->number;
     }
 
     public function getId(): ?int
@@ -69,36 +49,24 @@ class Location
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getText(): ?string
     {
-        return $this->name;
+        return $this->text;
     }
 
-    public function setName(string $name): self
+    public function setText(string $text): self
     {
-        $this->name = $name;
+        $this->text = $text;
 
         return $this;
     }
 
-    public function getNumber(): ?int
-    {
-        return $this->number;
-    }
-
-    public function setNumber(int $number): self
-    {
-        $this->number = $number;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
 
@@ -129,7 +97,7 @@ class Location
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setLocations($this);
+            $user->setGender($this);
         }
 
         return $this;
@@ -139,8 +107,8 @@ class Location
     {
         if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($user->getLocations() === $this) {
-                $user->setLocations(null);
+            if ($user->getGender() === $this) {
+                $user->setGender(null);
             }
         }
 
