@@ -22,7 +22,7 @@ class StyleController extends AbstractController
      */
     public function list(StyleRepository $styleRepository): Response
     {
-        return $this->render('admin/genre/list.html.twig', [
+        return $this->render('admin/style/list.html.twig', [
             'genres' => $styleRepository->findAll(),
         ]);
     }
@@ -39,7 +39,7 @@ class StyleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($genre);
+
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($style);
@@ -47,10 +47,10 @@ class StyleController extends AbstractController
 
             // Flash message
             $this->addFlash('info', 'Le style de musique ' . $style->getName() . ' a bien été créée');
-            return $this->redirectToRoute('admin_genre_list');
+            return $this->redirectToRoute('admin_style_list');
         }
 
-        return $this->render('admin/genre/add.html.twig', [
+        return $this->render('admin/style/add.html.twig', [
             'form' => $form->createView(),
         ]);  
     }
@@ -63,7 +63,7 @@ class StyleController extends AbstractController
     {
         $style = $styleRepository->find($id);
 
-        return $this->render('admin/genre/show.html.twig', [
+        return $this->render('admin/style/show.html.twig', [
             'genre' =>$style
         ]);
     }
@@ -74,16 +74,16 @@ class StyleController extends AbstractController
      */
     public function edit(Style $style, Request $request): Response
     {
-        $form = $this->createForm(GenreType::class, $style);
+        $form = $this->createForm(StyleType::class, $style);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'Le style de musique ' . $style->getName() . ' a bien été mis à jour');
-            return $this->redirectToRoute('admin_genre_show', ['id' => $style->getId()]);
+            return $this->redirectToRoute('admin_style_show', ['id' => $style->getId()]);
         }
-        return $this->render('admin/genre/edit.html.twig', [
+        return $this->render('admin/style/edit.html.twig', [
             'form' => $form->createView(),
             'genre' => $style
         ]);
@@ -97,7 +97,7 @@ class StyleController extends AbstractController
     {
         $submittedToken = $request->get('token');
 
-        if ($this->isCsrfTokenValid('delete-genre', $submittedToken)) {
+        if ($this->isCsrfTokenValid('delete-style', $submittedToken)) {
             $styleToDelete = $styleRepository->find($id);
             $styleName = $styleToDelete->getName();
             if ($styleToDelete  === null) {
@@ -109,7 +109,7 @@ class StyleController extends AbstractController
             $em->flush();
 
             $this->addFlash('success', 'Le style musicale ' . $styleName . ' a bien été supprimée');
-            return $this->redirectToRoute('admin_genre_list');
+            return $this->redirectToRoute('admin_style_list');
         } else {
             return new Response('Action interdite', 403);
         }

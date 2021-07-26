@@ -37,7 +37,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($user);
+            // dd($user);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'L\'utilisateur ' . $user->getPseudo() . ' a bien été mis à jour');
