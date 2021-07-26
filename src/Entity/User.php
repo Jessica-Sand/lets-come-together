@@ -44,7 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
-     * @Groups({"User", "instruments_users", "Genres_User", "Locations_Users"})
+     * @Groups({"User", "instruments_users", "Genres_User", "Departments_Users"})
      * @Assert\NotBlank(message="Veuillez renseiger votre Pseudonyme")
      */
     private $pseudo;
@@ -76,23 +76,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $age;
 
     /**
-     * @ORM\Column(type="string")
-     * @Groups({"User"})
-     * @Assert\NotBlank(message="Veuillez renseigner votre sexe")
-     */
-    private $gender;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      * @Groups({"User"})
      */
     private $influence;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     * @Groups({"User"})
-     */
-    private $availability;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
@@ -156,12 +143,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $Genres;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="users", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity=Department::class, inversedBy="users", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="Veuillez renseigner un département existant")
      * @Groups({"User"})
      */
-    private $Locations;
+    private $Departments;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Availability::class, inversedBy="gender")
+     */
+    private $availability;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Gender::class, inversedBy="users")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $gender;
 
     public function __construct()
     {
@@ -309,22 +307,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getGender(): ?string
-    {
-        return $this->gender;
-    }
-
-    public function setGender(string $gender): self
-    {
-        if (!in_array($gender, array('Homme', 'Femme', 'Autre'))) {
-            throw new \InvalidArgumentException("Invalid type");
-        }
-
-        $this->gender = $gender;
-
-        return $this;
-    }
-
     public function getInfluence(): ?string
     {
         return $this->influence;
@@ -333,18 +315,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setInfluence(?string $influence): self
     {
         $this->influence = $influence;
-
-        return $this;
-    }
-
-    public function getAvailability(): ?string
-    {
-        return $this->availability;
-    }
-
-    public function setAvailability(?string $availability): self
-    {
-        $this->availability = $availability;
 
         return $this;
     }
@@ -481,14 +451,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLocations(): ?Location
+    public function getDepartments(): ?Department
     {
-        return $this->Locations;
+        return $this->Departments;
     }
 
-    public function setLocations(?Location $Locations): self
+    public function setDepartments(?Department $Departments): self
     {
-        $this->Locations = $Locations;
+        $this->Departments = $Departments;
+
+        return $this;
+    }
+
+    public function getAvailability(): ?Availability
+    {
+        return $this->availability;
+    }
+
+    public function setAvailability(?Availability $availability): self
+    {
+        $this->availability = $availability;
+
+        return $this;
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?Gender $gender): self
+    {
+        $this->gender = $gender;
 
         return $this;
     }
