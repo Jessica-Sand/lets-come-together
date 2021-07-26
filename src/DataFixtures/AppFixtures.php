@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Availability;
 use App\Entity\Gender;
 use App\Entity\Style;
 use App\Entity\User;
@@ -46,6 +47,14 @@ class AppFixtures extends Fixture
             'blues',
             'punk',
             'ska'
+        ];
+
+        // create a list for the availability
+        $availabilityList = [
+            'plusieurs fois par semaine',
+            '1 fois par semaine',
+            'plusieurs fois par mois',
+            '1 fois par mois'
         ];
 
         foreach ($styleList as $currentStyle) {
@@ -113,6 +122,17 @@ class AppFixtures extends Fixture
         ));
 
         $manager->persist($apiUser2);  
+
+        foreach ($availabilityList as $currentAvailability) {
+            // creating a new availability
+            $availability = new Availability();
+
+            // setting the property
+            $availability->setText($currentAvailability);
+
+            // include the data
+            $manager->persist($availability);
+        }
 
         // setting the BDD
         $manager->flush();
