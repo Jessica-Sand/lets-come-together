@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Location;
+use App\Entity\Department;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Location|null find($id, $lockMode = null, $lockVersion = null)
- * @method Location|null findOneBy(array $criteria, array $orderBy = null)
- * @method Location[]    findAll()
- * @method Location[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Department|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Department|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Department[]    findAll()
+ * @method Department[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LocationRepository extends ServiceEntityRepository
+class DepartmentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Location::class);
+        parent::__construct($registry, Department::class);
     }
 
     // /**
-    //  * @return Location[] Returns an array of Location objects
+    //  * @return Department[] Returns an array of Department objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class LocationRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Location
+    public function findOneBySomeField($value): ?Department
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.exampleField = :val')
