@@ -7,14 +7,14 @@ use App\Form\Type\InstrumentType;
 use App\Repository\InstrumentRepository;
 use App\Service\ImageUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("admin/instrument", name="admin_instrument_")
+ * @Route("instrument", name="admin_instrument_")
+ * @IsGranted("ROLE_ADMIN")
  */
 class InstrumentController extends AbstractController
 {

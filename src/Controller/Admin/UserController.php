@@ -9,9 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("/admin/user", name="admin_user_")
+ * @Route("user", name="admin_user_")
+ * @IsGranted("ROLE_ADMIN")
  */
 class UserController extends AbstractController
 {
@@ -38,7 +40,7 @@ class UserController extends AbstractController
             dd($user);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            $this->addFlash('success', 'Lutilisateur ' . $user->getPseudo() . ' a bien été mis à jour');
+            $this->addFlash('success', 'L\'utilisateur ' . $user->getPseudo() . ' a bien été mis à jour');
             
         }
 

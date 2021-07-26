@@ -13,9 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("/", name="admin_")
+ * @Route("", name="admin_")
+ * @IsGranted("ROLE_ADMIN")
  */
 class AdminController extends AbstractController
 {
@@ -24,7 +26,7 @@ class AdminController extends AbstractController
      */
     public function index(GenreRepository $genreRepository, InstrumentRepository $instrumentRepository): Response
     {
-        return $this->render('admin/index.html.twig', [
+        return $this->render('admin/layout.html.twig', [
             'genres' => $genreRepository,
             'instruments' => $instrumentRepository
         ]);
@@ -33,6 +35,8 @@ class AdminController extends AbstractController
     /**
      * @Route("/add", name="add")
      * @return void
+     * 
+     * @IsGranted("ROLE_SUPER_ADMIN")
      */
     public function add(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {

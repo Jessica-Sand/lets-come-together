@@ -9,9 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("/admin/genre", name="admin_genre_", requirements={"index" = "\d+"})
+ * @Route("genre", name="admin_genre_", requirements={"index" = "\d+"})
+ * @IsGranted("ROLE_ADMIN")
  */
 class GenreController extends AbstractController
 {
