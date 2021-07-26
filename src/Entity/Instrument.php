@@ -31,7 +31,7 @@ class Instrument
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank(message="Veuillez ajouter une icone")
      */
     private $icon;

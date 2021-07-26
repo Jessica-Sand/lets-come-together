@@ -67,6 +67,6 @@ class AppFixtures extends Fixture
             // On inclut les données dans la liste d'attente
             $manager->persist($gender);
         }
-
+        $manager->flush();
     }
 }
