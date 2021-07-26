@@ -54,7 +54,7 @@ class RegistrationController extends AbstractController
         
             return $this->json(
                 [
-                    'message' => 'L\'utilisateur ' . $user->getPseudo() . ' à bien été créer'
+                    'message' => 'Votre compte à bien été créé'
                 ],
                 201
             );
