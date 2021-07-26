@@ -2,9 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Genre;
-use App\Form\Type\GenreType;
-use App\Repository\GenreRepository;
+use App\Entity\Style;
+use App\Form\Type\StyleType;
+use App\Repository\StyleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,18 +12,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("genre", name="admin_genre_", requirements={"index" = "\d+"})
+ * @Route("style", name="admin_style_", requirements={"index" = "\d+"})
  * @IsGranted("ROLE_ADMIN")
  */
-class GenreController extends AbstractController
+class StyleController extends AbstractController
 {
     /**
      * @Route("/list", name="list")
      */
-    public function list(GenreRepository $genreRepository): Response
+    public function list(StyleRepository $styleRepository): Response
     {
         return $this->render('admin/genre/list.html.twig', [
-            'genres' => $genreRepository->findAll(),
+            'genres' => $styleRepository->findAll(),
         ]);
     }
 
@@ -33,20 +33,20 @@ class GenreController extends AbstractController
      */
     public function add(Request $request): Response
     {
-        $genre = new Genre();
+        $style = new Style();
 
-        $form = $this->createForm(GenreType::class, $genre);
+        $form = $this->createForm(StyleType::class, $style);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // dd($genre);
             $em = $this->getDoctrine()->getManager();
 
-            $em->persist($genre);
+            $em->persist($style);
             $em->flush();
 
             // Flash message
-            $this->addFlash('info', 'Le style de musique ' . $genre->getName() . ' a bien été créée');
+            $this->addFlash('info', 'Le style de musique ' . $style->getName() . ' a bien été créée');
             return $this->redirectToRoute('admin_genre_list');
         }
 
@@ -59,12 +59,12 @@ class GenreController extends AbstractController
      * @Route("/{id}", name="show")
      * @return void
      */
-    public function show(int $id, GenreRepository $genreRepository)
+    public function show(int $id, StyleRepository $styleRepository)
     {
-        $genre = $genreRepository->find($id);
+        $style = $styleRepository->find($id);
 
         return $this->render('admin/genre/show.html.twig', [
-            'genre' =>$genre
+            'genre' =>$style
         ]);
     }
 
@@ -72,20 +72,20 @@ class GenreController extends AbstractController
      * @Route("/{id}/edit", name="edit")
      * @return void
      */
-    public function edit(Genre $genre, Request $request): Response
+    public function edit(Style $style, Request $request): Response
     {
-        $form = $this->createForm(GenreType::class, $genre);
+        $form = $this->createForm(GenreType::class, $style);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
-            $this->addFlash('success', 'Le style de musique ' . $genre->getName() . ' a bien été mis à jour');
-            return $this->redirectToRoute('admin_genre_show', ['id' => $genre->getId()]);
+            $this->addFlash('success', 'Le style de musique ' . $style->getName() . ' a bien été mis à jour');
+            return $this->redirectToRoute('admin_genre_show', ['id' => $style->getId()]);
         }
         return $this->render('admin/genre/edit.html.twig', [
             'form' => $form->createView(),
-            'genre' => $genre
+            'genre' => $style
         ]);
     }
 
@@ -93,22 +93,22 @@ class GenreController extends AbstractController
      * @Route("/delete", name="delete")
      * @return void
      */
-    public function delete(int $id, GenreRepository $genreRepository, Request $request)
+    public function delete(int $id, StyleRepository $styleRepository, Request $request)
     {
         $submittedToken = $request->get('token');
 
         if ($this->isCsrfTokenValid('delete-genre', $submittedToken)) {
-            $genreToDelete = $genreRepository->find($id);
-            $genreName = $genreToDelete->getName();
-            if ($genreToDelete  === null) {
+            $styleToDelete = $styleRepository->find($id);
+            $styleName = $styleToDelete->getName();
+            if ($styleToDelete  === null) {
                 throw $this->createNotFoundException('La ressource demandée n\'existe pas');
             }
 
             $em = $this->getDoctrine()->getManager();
-            $em->remove($genreToDelete);
+            $em->remove($styleToDelete);
             $em->flush();
 
-            $this->addFlash('success', 'Le style musicale ' . $genreName . ' a bien été supprimée');
+            $this->addFlash('success', 'Le style musicale ' . $styleName . ' a bien été supprimée');
             return $this->redirectToRoute('admin_genre_list');
         } else {
             return new Response('Action interdite', 403);
