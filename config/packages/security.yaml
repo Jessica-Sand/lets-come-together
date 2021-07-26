@@ -4,6 +4,8 @@ security:
     password_hashers:
         App\Entity\User:
             algorithm: auto
+        App\Entity\UserApp:
+            algorithm: auto
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
@@ -12,10 +14,15 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+        app_userapp_provider:
+            entity:
+                class: App\Entity\UserApp
+                property: email
     firewalls:
         login:
             pattern: ^/api/login
             stateless: true
+            provider: app_user_provider
             json_login:
                 check_path: /api/login_check
                 success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -24,6 +31,7 @@ security:
         api:
             pattern:   ^/api
             stateless: true
+            provider: app_user_provider
             jwt: ~
 
         dev:
@@ -31,7 +39,7 @@ security:
             security: false
         main:
             lazy: true
-            provider: app_user_provider
+            provider: app_userapp_provider
             custom_authenticator: App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
@@ -49,6 +57,8 @@ security:
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
-        # - { path: ^/admin/*, roles: ROLE_ADMIN }
+        - { path: ^/admin/add, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/admin/*, roles: ROLE_ADMIN }
+        - { path: ^/$, roles: ROLE_ADMIN }
+        - { path: ^/(login|logout), roles: }
         # - { path: ^/profile, roles: ROLE_USER }
-        # - { path: ^/admin/user/add, roles: ROLE_SUPER_ADMIN }
