@@ -2,11 +2,10 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Instrument;
 use App\Entity\UserApp;
 use App\Form\RegistrationUserAppType;
-use App\Repository\GenreRepository;
 use App\Repository\InstrumentRepository;
+use App\Repository\StyleRepository;
 use App\Repository\UserAppRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,10 +23,10 @@ class AdminController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(GenreRepository $genreRepository, InstrumentRepository $instrumentRepository): Response
+    public function index(StyleRepository $styleRepository, InstrumentRepository $instrumentRepository): Response
     {
         return $this->render('admin/layout.html.twig', [
-            'genres' => $genreRepository,
+            'genres' => $styleRepository,
             'instruments' => $instrumentRepository
         ]);
     }

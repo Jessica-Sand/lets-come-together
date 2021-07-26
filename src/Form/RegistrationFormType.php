@@ -38,7 +38,7 @@ class RegistrationFormType extends AbstractType
             ->add('availability')
             ->add('perimeter')
             ->add('Instruments')
-            ->add('Genres')
+            ->add('styles')
             ->add('Locations', null, [
                 'label' => 'Département',
                 'required' => true,

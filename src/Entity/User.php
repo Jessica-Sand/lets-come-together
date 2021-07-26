@@ -150,10 +150,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *      min = 1,
      *      minMessage = "L'utilisateur doit avoir au minimum un style de musique"
      * )
-     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Style::class, inversedBy="users")
      * @Groups({"User"})
      */
-    private $Genres;
+    private $styles;
 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="users", cascade={"persist"})
@@ -168,7 +168,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->created_at = new DateTimeImmutable();
         $this->updated_at = new DateTime();
         $this->Instruments = new ArrayCollection();
-        $this->Genres = new ArrayCollection();
+        $this->styles = new ArrayCollection();
         $this->status = true;
     }
 
@@ -458,25 +458,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection|Genre[]
+     * @return Collection|Style[]
      */
-    public function getGenres(): Collection
+    public function getStyles(): Collection
     {
-        return $this->Genres;
+        return $this->styles;
     }
 
-    public function addGenre(Genre $genre): self
+    public function addStyle(Style $style): self
     {
-        if (!$this->Genres->contains($genre)) {
-            $this->Genres[] = $genre;
+        if (!$this->styles->contains($style)) {
+            $this->styles[] = $style;
         }
 
         return $this;
     }
 
-    public function removeGenre(Genre $genre): self
+    public function removeStyle(Style $style): self
     {
-        $this->Genres->removeElement($genre);
+        $this->styles->removeElement($style);
 
         return $this;
     }
