@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Musiciens |
+    {{ parent() }} 
+{% endblock %}
+
+{% block body %}
+<section class="text-center container">
+		<div class="row">
+			<div class="col-lg-6 col-md-8 mx-auto mb-4">
+				<h1 class="fw-light">
+					Administrateurs enregistrés
+				{% if app.user.roles == ["ROLE_ADMIN","ROLE_SUPER_ADMIN"] %}
+				<a href="{{ path('admin_add') }}">
+					<button type="button" class="btn btn-success ">Ajouter</button>
+				</a>
+				{% endif %}
+				</h1>
+			</div>
+		</div>
+	</section>
+
+<div class="container">
+	<div class="row">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<td class="col-2">#</td>
+					<td class="col-5">Nom</td>
+					<td>Role</td>
+					<td></td>
+					<td></td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in users %}
+					<tr>
+						<td class="col-2">{{user.id}}</td>
+						<td class="col-5">{{user.firstname}} {{user.lastname}}</td>
+                        <td>
+							{{ user.roles ? user.roles|json_encode : '' }}
+                        </td>
+						<td>
+							<a href="{{ path('admin_edit', {id: user.id}) }}">
+								<button type="button" class="btn btn-outline-success ">Editer</button>
+							</a>
+
+						</td>
+						<td>
+							<form method="post" action="{{ path('admin_delete', {'id': user.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer ce profil?');">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+								<button class="btn btn-outline-danger">Supprimer</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}
