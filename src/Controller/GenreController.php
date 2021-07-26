@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Repository\GenreRepository;
+use App\Repository\StyleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,9 +15,9 @@ class GenreController extends AbstractController
     /**
      * @Route("/genres", name="genres")
      */
-    public function list(GenreRepository $genreRepository): Response
+    public function list(StyleRepository $styleRepository): Response
     {
-        return $this->json($genreRepository->findAll(), 200, [], [
+        return $this->json($styleRepository->findAll(), 200, [], [
             'groups' => 'Genres'
         ]);
     }
@@ -25,9 +25,9 @@ class GenreController extends AbstractController
     /**
      * @Route("/genres/{id}", name="genres_users")
      */
-    public function show($id, GenreRepository $genreRepository): Response
+    public function show($id, StyleRepository $styleRepository): Response
     {
-        return $this->json($genreRepository->findOneBy(['id' => $id]), 200, [], [
+        return $this->json($styleRepository->findOneBy(['id' => $id]), 200, [], [
             'groups' => 'Genres_User'
         ]);
     }

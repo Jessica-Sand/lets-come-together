@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Repository\GenreRepository;
+use App\Repository\StyleRepository;
 use DateTime;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,9 +12,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=GenreRepository::class)
+ * @ORM\Entity(repositoryClass=StyleRepository::class)
  */
-class Genre
+class Style
 {
     /**
      * @ORM\Id
@@ -41,7 +41,7 @@ class Genre
     private $updated_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="Genres")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="styles")
      * @Groups({"Genres_User"})
      */
     private $users;
@@ -111,7 +111,7 @@ class Genre
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addGenre($this);
+            $user->addStyle($this);
         }
 
         return $this;
@@ -120,7 +120,7 @@ class Genre
     public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
-            $user->removeGenre($this);
+            $user->removeStyle($this);
         }
 
         return $this;

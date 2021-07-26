@@ -4,9 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Repository\GenreRepository;
 use App\Repository\InstrumentRepository;
 use App\Repository\DepartmentRepository;
+use App\Repository\StyleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ class RegistrationController extends AbstractController
     private $genreRepository;
     private $instrumentRepository;
 
-    public function __construct(DepartmentRepository $department, GenreRepository $genre, InstrumentRepository $instrument)
+    public function __construct(DepartmentRepository $department, StyleRepository $genre, InstrumentRepository $instrument)
     {
         $this->departmentRepository = $department;
         $this->genreRepository = $genre;
