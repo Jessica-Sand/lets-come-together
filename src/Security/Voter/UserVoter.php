@@ -4,16 +4,25 @@ namespace App\Security\Voter;
 
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserVoter extends Voter
 {
+
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     protected function supports(string $attribute, $subject): bool
     {
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
-        return in_array($attribute, ['POST_EDIT', 'POST_VIEW'])
-            && $subject instanceof \App\Entity\User;
+        return in_array($attribute, ['ADMIN_EDIT', 'ADMIN_DELETE'])
+            && $subject instanceof \App\Entity\UserApp;
     }
 
     protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
@@ -26,13 +35,17 @@ class UserVoter extends Voter
 
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
-            case 'POST_EDIT':
-                // logic to determine if the user can EDIT
-                // return true or false
+            case 'ADMIN_EDIT':
+                
+                if ($user === $subject || $this->security->isGranted('ROLE_SUPER_ADMIN')) {
+                    return true;
+                }
+
                 break;
-            case 'POST_VIEW':
-                // logic to determine if the user can VIEW
-                // return true or false
+            case 'ADMIN_DELETE':
+                if ($user === $subject || $this->security->isGranted('ROLE_SUPER_ADMIN')) {
+                    return true;
+                }
                 break;
         }
 

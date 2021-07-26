@@ -49,37 +49,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="add")
-     * @return void
-     */
-    public function add(Request $request): Response
-    {
-        $user = new User();
-
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // dd($user);
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($user);
-            $em->flush();
-
-            // Flash message
-            $this->addFlash('info', 'L\'utilisateur ' . $user->getPseudo() . ' a bien été créée');
-            return $this->redirectToRoute('admin_user_list');
-        }
-
-        return $this->render('admin/user/add.html.twig', [
-            'form' => $form->createView(),
-        ]);  
-    }
-
-    /**
      * @Route("/{id}/status", name="status_change")
      *
-     * @return void
+     * Function for change the status of the User in the DataBase
      */
     public function statusChange(User $user)
     {
@@ -88,12 +60,12 @@ class UserController extends AbstractController
             $user->setStatus(0);
             $em->flush();
 
-            return $this->redirectToRoute('admin_user_list', ['id' => $user->getId()]);
+            return $this->redirectToRoute('admin_user_list');
         }else{
             $user->setStatus(1);
             $em->flush();
 
-            return $this->redirectToRoute('admin_user_list', ['id' => $user->getId()]);
+            return $this->redirectToRoute('admin_user_list');
         }
     }
 
