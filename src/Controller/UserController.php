@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/api/v1", name="api_v1_")
@@ -39,6 +40,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/users/{id}/edit", name="users_edit", methods={"PUT|PATCH"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function edit(User $user, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
     {
@@ -61,5 +63,20 @@ class UserController extends AbstractController
         return $this->json([
             'errors' => (string) $errors
         ], 400);
+    }
+
+    /**
+     * @Route("/users/{id}", name="users_delete", methods={"DELETE"}, requirements={"id" = "\d+"})
+     */
+    public function delete(User $user): Response
+    {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($user);
+            $entityManager->flush();
+        
+
+        return $this->json([
+            'message' => 'Le compte à bien été supprimé'
+        ], 204);
     }
 }
