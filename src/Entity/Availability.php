@@ -18,6 +18,7 @@ class Availability
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"Availabilities"})
      */
     private $id;
 
