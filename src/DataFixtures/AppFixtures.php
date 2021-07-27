@@ -95,7 +95,7 @@ class AppFixtures extends Fixture
             'hard rock',
             'reggae',
             'chanson française',
-            'electro',d 
+            'electro',
             'world',
             'blues',
             'punk',
