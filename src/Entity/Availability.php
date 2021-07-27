@@ -7,6 +7,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=AvailabilityRepository::class)
@@ -17,11 +18,13 @@ class Availability
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"Availabilities"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"User", "Availabilities", "Availabilities_User"})
      */
     private $text;
 
@@ -37,6 +40,7 @@ class Availability
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="availability")
+     * @Groups({"Availabilities_User"})
      */
     private $users;
 
