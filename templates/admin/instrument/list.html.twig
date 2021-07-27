@@ -46,7 +46,7 @@
 							<a href="{{ path('admin_instrument_edit', {id:instrument.id}) }}" class="btn btn-outline-success">Editer</a>
 						</td>
 						<td>
-							<a href="{{ path('admin_instrument_delete', {id:instrument.id, token:csrf_token('delete-item')}) }}" class="btn btn-outline-danger">Supprimer</a>
+							<a href="{{ path('admin_instrument_delete', {id:instrument.id, token:csrf_token('delete-instrument')}) }}" class="btn btn-outline-danger">Supprimer</a>
 						</td>
 					</tr>
 				{% endfor %}
