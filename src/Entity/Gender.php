@@ -7,6 +7,8 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=GenderRepository::class)
@@ -22,6 +24,8 @@ class Gender
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Groups({"User", "Genders", "Genders_User"})
+     * @Assert\NotBlank(message="Veuillez renseigner votre sexe")
      */
     private $text;
 
@@ -37,6 +41,7 @@ class Gender
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="gender")
+     * @Groups({"Genders_User"})
      */
     private $users;
 
