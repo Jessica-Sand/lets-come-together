@@ -31,13 +31,13 @@ class Department
     private $name;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=10)
      * @Groups({"User", "Departments"})
      */
     private $number;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime_immutable", nullable=true)
      */
     private $created_at;
 
