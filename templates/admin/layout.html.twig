@@ -20,11 +20,12 @@
                             </tr>
                             </thead>
                             <tbody>
+                            {% for instrument in instruments %}
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Guitare</td>
+                                    <th scope="row">{{ instrument.id }}</th>
+                                    <td>{{ instrument.name }}</td>
                                     <td class="text-right">
-                                        <a href="" class="btn btn-sm btn-warning">
+                                        <a href="{{ path('admin_instrument_edit', {id:instrument.id}) }}" class="btn btn-sm btn-warning">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                         <div class="btn-group">
@@ -37,7 +38,8 @@
                                             </div>
                                         </div>
                                     </td>
-                            </tr>
+                                </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                         <a href="{{ path('admin_instrument_list') }}" class="btn btn-block btn-success">Voir plus</a>
@@ -57,11 +59,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            {% for style in styles %}
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Rock</td>
+                                    <th scope="row">{{ style.id }}</th>
+                                    <td>{{ style.name }}</td>
                                     <td class="text-right">
-                                        <a href="" class="btn btn-sm btn-warning">
+                                        <a href="{{ path('admin_style_edit', {id:style.id}) }}" class="btn btn-sm btn-warning">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </a>
                                     <div class="btn-group">
@@ -75,6 +78,7 @@
                                     </div>
                                     </td>
                                 </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                         <a href="{{ path('admin_style_list') }}" class="btn btn-block btn-success">Voir plus</a>
