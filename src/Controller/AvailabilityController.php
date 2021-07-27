@@ -18,7 +18,7 @@ class AvailabilityController extends AbstractController
     public function list(AvailabilityRepository $availabilityRepository): Response
     {
         return $this->json($availabilityRepository->findAll(), 200, [], [
-            'groups' => 'availability'
+            'groups' => 'Availabilities'
         ]);
     }
 
@@ -29,7 +29,7 @@ class AvailabilityController extends AbstractController
     {
         return $this->json($availabilityRepository->findOneBy(['id' => $id]),
         200, [], [
-            'groups' => 'availabilities_user'
+            'groups' => 'Availabilities_User'
         ]);
     }
 }

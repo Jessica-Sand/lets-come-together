@@ -22,6 +22,7 @@ class Availability
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"User", "Availabilities", "Availabilities_User"})
      */
     private $text;
 
@@ -37,6 +38,7 @@ class Availability
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="availability")
+     * @Groups({"Availabilities_User"})
      */
     private $users;
 

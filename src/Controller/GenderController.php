@@ -18,7 +18,7 @@ class GenderController extends AbstractController
     public function list(GenderRepository $genderRepository): Response
     {
         return $this->json($genderRepository->findAll(), 200, [], [
-            'groups' => 'gender',
+            'groups' => 'Gender',
         ]);
     }
 
@@ -29,7 +29,7 @@ class GenderController extends AbstractController
     {
         return $this->json($genderRepository->findOneBy(['id' => $id]),
         200, [], [
-            'groups' => 'genders_user'
+            'groups' => 'Genders_User'
         ]);
     }
 }

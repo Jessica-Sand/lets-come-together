@@ -22,6 +22,8 @@ class City
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Groups({"User", "Cities", "Cities_User"})
+     * @Assert\NotBlank(message="Veuillez renseigner votre ville")
      */
     private $name;
 
@@ -37,6 +39,7 @@ class City
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="cities")
+     * @Groups({"Cities_User"})
      */
     private $users;
 

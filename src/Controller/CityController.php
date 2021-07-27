@@ -18,7 +18,7 @@ class CityController extends AbstractController
     public function list(CityRepository $cityRepository): Response
     {
         return $this->json($cityRepository->findAll(), 200, [], [
-            'groups' => 'cities'
+            'groups' => 'Cities'
         ]);
     }
 
@@ -29,7 +29,7 @@ class CityController extends AbstractController
     {
         return $this->json($cityRepository->findOneBy(['id' => $id]),
         200, [], [
-            'groups' => 'cities_user'
+            'groups' => 'Cities_User'
         ]);
     }
 }

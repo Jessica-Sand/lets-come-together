@@ -22,6 +22,8 @@ class Gender
 
     /**
      * @ORM\Column(type="string", length=10)
+     * @Groups({"User", "Genders", "Genders_User"})
+     * @Assert\NotBlank(message="Veuillez renseigner votre sexe")
      */
     private $text;
 
@@ -37,6 +39,7 @@ class Gender
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="gender")
+     * @Groups({"Genders_User"})
      */
     private $users;
 
