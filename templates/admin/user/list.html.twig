@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/layout.html.twig' %}
 
 {% block title %}
     Musiciens |
@@ -38,7 +38,7 @@
 							</a>
 							{% else %}
 							<a href="{{ path('admin_user_status_change', {id:user.id}) }}">
-								<button type="button" class="btn btn-danger col-2">Inactif</button>
+								<button type="button" class="btn btn-outline-danger col-2">Inactif</button>
 							</a>
 							{% endif %}
                         </td>

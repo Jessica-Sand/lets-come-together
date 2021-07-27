@@ -1,34 +1,44 @@
 <header>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
 		<div class="container">
-			<a class="navbar-brand navbar-brand-logo" href="">
-				<img src="" alt="logo">
+			<a class="navbar-brand navbar-brand-logo" href="{{ path('admin_list') }}">
+				<img src="{{ asset("uploads/images/Logo_white.png") }}" alt="logo" style="width:10%">
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav ms-auto">
-					<li class="nav-item{% if currentRoute == 'admin_list' %} active{% endif %}">
-						<a class="nav-link" href="{{ path('admin_list') }}">
+					<li class="nav-item">
+						<a class="nav-link{% if currentRoute == 'admin_home' %} active{% endif %}" href="{{ path('admin_home') }}">
                         Accueil
                         </a>
 					</li>
-					<li class="nav-item{% if currentRoute == 'admin_instrument_list' %} active{% endif %}">
-						<a class="nav-link" href="{{ path('admin_instrument_list') }}">
+					<li class="nav-item">
+						<a class="nav-link{% if currentRoute == 'admin_instrument_list' %} active{% endif %}" href="{{ path('admin_instrument_list') }}">
                         Instruments
                         </a>
 					</li>
-					<li class="nav-item{% if currentRoute == 'admin_genre_list' %} active{% endif %}">
-						<a class="nav-link" href="{{ path('admin_genre_list') }}">
+					<li class="nav-item">
+						<a class="nav-link{% if currentRoute == 'admin_style_list' %} active{% endif %}" href="{{ path('admin_style_list') }}">
                         Style
                         </a>
 					</li>
-                    <li class="nav-item{% if currentRoute == 'admin_user_list' %} active{% endif %}">
-						<a class="nav-link" href="{{ path('admin_user_list') }}">
+                    <li class="nav-item">
+						<a class="nav-link{% if currentRoute == 'admin_user_list' %} active{% endif %}" href="{{ path('admin_user_list') }}">
                         Utilisateurs
                         </a>
 					</li>
+					<li class="nav-item col-6">
+						<a class="nav-link{% if currentRoute == 'admin_list' %} active{% endif %}" href="{{ path('admin_list') }}">
+                        Administrateurs
+                        </a>
+					</li>
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					<a href="{{ path('app_logout') }}">
+						<button type="button" class="btn btn-danger">Déconnexion</button>
+					</a>
+					{% endif %}
 				</ul>
 			</div>
 		</div>

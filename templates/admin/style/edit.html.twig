@@ -1,0 +1,33 @@
+{% extends 'admin/layout.html.twig' %}
+
+{% block title %}
+    {{genre.name}}
+	-
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+<section class="text-center container">
+	<div class="row">
+		<div class="col-lg-6 col-md-8 mx-auto mb-4">
+			<h1 class="fw-light">
+				Modifier {{genre.name}}
+			</h1>
+		</div>
+	</div>
+</section>
+
+<div class="container">
+
+    {{ form(form) }}
+
+</div>
+
+<div class="py-3 bg-light">
+	<div class="container">
+		<p>
+			<a href="{{path('admin_style_list')}}">Retour à la liste</a>
+		</p>
+	</div>
+</div>
+{% endblock %}
