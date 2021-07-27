@@ -45,6 +45,7 @@ class Gender
         $this->created_at = new DateTime();
         $this->updated_at = new DateTime();
         $this->users = new ArrayCollection();
+        $this->created_at = new DateTime();
     }
 
     public function getId(): ?int

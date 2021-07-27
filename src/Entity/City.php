@@ -2,19 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\DepartmentRepository;
-use DateTime;
+use App\Repository\CityRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ORM\Entity(repositoryClass=DepartmentRepository::class)
+ * @ORM\Entity(repositoryClass=CityRepository::class)
  */
-class Department
+class City
 {
     /**
      * @ORM\Id
@@ -24,17 +21,9 @@ class Department
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     * @Groups({"User", "Departments", "Departments_Users"})
-     * @Assert\NotBlank(message="Veuillez renseigner votre Localisation")
+     * @ORM\Column(type="string", length=150)
      */
     private $name;
-
-    /**
-     * @ORM\Column(type="string", length=10)
-     * @Groups({"User", "Departments"})
-     */
-    private $number;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
@@ -47,21 +36,14 @@ class Department
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="Departments")
-     * @Groups({"Departments_Users"})
+     * @ORM\OneToMany(targetEntity=User::class, mappedBy="cities")
      */
     private $users;
 
     public function __construct()
     {
-        $this->created_at = new DateTimeImmutable();
-        $this->updated_at = new DateTime();
         $this->users = new ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return $this->name . '' . $this->number;
+        $this->created_at = new DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -77,18 +59,6 @@ class Department
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getNumber(): ?int
-    {
-        return $this->number;
-    }
-
-    public function setNumber(int $number): self
-    {
-        $this->number = $number;
 
         return $this;
     }
@@ -129,7 +99,7 @@ class Department
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->setDepartments($this);
+            $user->setCities($this);
         }
 
         return $this;
@@ -139,8 +109,8 @@ class Department
     {
         if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
-            if ($user->getDepartments() === $this) {
-                $user->setDepartments(null);
+            if ($user->getCities() === $this) {
+                $user->setCities(null);
             }
         }
 
