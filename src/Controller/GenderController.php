@@ -18,7 +18,7 @@ class GenderController extends AbstractController
     public function list(GenderRepository $genderRepository): Response
     {
         return $this->json($genderRepository->findAll(), 200, [], [
-            'groups' => 'Gender',
+            'groups' => 'Genders',
         ]);
     }
 
