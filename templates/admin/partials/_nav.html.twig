@@ -1,8 +1,8 @@
 <header>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
 		<div class="container">
-			<a class="navbar-brand navbar-brand-logo" href="{{ path('admin_list') }}">
-				<img src="{{ asset("uploads/images/Logo_white.png") }}" alt="logo" style="width:10%">
+			<a class="navbar-brand navbar-brand-logo col-1" href="{{ path('admin_list') }}">
+				<img src="{{ asset("uploads/images/Logo_white.png") }}" alt="logo" style="width:60%">
 			</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -29,9 +29,14 @@
                         Utilisateurs
                         </a>
 					</li>
-					<li class="nav-item col-6">
+					<li class="nav-item col-">
 						<a class="nav-link{% if currentRoute == 'admin_list' %} active{% endif %}" href="{{ path('admin_list') }}">
                         Administrateurs
+                        </a>
+					</li>
+					<li class="nav-item col-5">
+						<a class="nav-link{% if currentRoute == 'admin_request_list' %} active{% endif %}" href="{{ path('admin_request_list') }}">
+                        Requetes-Utilisateur
                         </a>
 					</li>
 					{% if is_granted('IS_AUTHENTICATED_FULLY') %}

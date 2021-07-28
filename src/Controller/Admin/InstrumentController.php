@@ -62,10 +62,10 @@ class InstrumentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="show")
+     * @Route("/{id}", name="show", requirements={"id"="\d+"})
      * @return void
      */
-    public function show(int $id, InstrumentRepository $instrumentRepository)
+    public function show($id, InstrumentRepository $instrumentRepository)
     {
         $instrument = $instrumentRepository->find($id);
 
@@ -96,10 +96,10 @@ class InstrumentController extends AbstractController
     }
 
     /**
-     * @Route("/delete", name="delete")
+     * @Route("/{id}/delete", name="delete", requirements={"id"="\d+"})
      * @return void
      */
-    public function delete(int $id, InstrumentRepository $instrumentRepository, Request $request)
+    public function delete($id, InstrumentRepository $instrumentRepository, Request $request)
     {
         $submittedToken = $request->get('token');
 

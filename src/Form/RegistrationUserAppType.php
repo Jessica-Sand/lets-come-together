@@ -10,23 +10,46 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Security;
 
 class RegistrationUserAppType extends AbstractType
 {
+    private $security;
+
+    public function __construct(Security $security)
+        {
+            // Avoid calling getUser() in the constructor: auth may not
+            // be complete yet. Instead, store the entire Security object.
+            $this->security = $security;
+        }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('email')
             ->add('firstname')
             ->add('lastname')
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Super Administrateur' => 'ROLE_SUPER_ADMIN',
-                    'Administrateur' => 'ROLE_ADMIN',
-                ],
-                'multiple' => true,
-                'expanded' => true
-            ])
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                // Avant construction du formulaire, on va d'abord vérifier dans
+                // quel contexte on se trouve :
+                // - Création : on rendra obligatoire la saisie d'un mot de passe
+                // - Edition : la saisie du mot de passe sera facultative
+                $form = $event->getForm();
+                $userRoles = $this->security->getUser();
+
+                if (in_array("ROLE_SUPER_ADMIN", $userRoles->getRoles())) {
+                    $form->add('roles', ChoiceType::class, [
+                        'choices' => [
+                            'Super Administrateur' => 'ROLE_SUPER_ADMIN',
+                            'Administrateur' => 'ROLE_ADMIN',
+                        ],
+                        'multiple' => true,
+                        'expanded' => true
+                    ]);
+                } else {
+                    
+                }
+            })
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 // Avant construction du formulaire, on va d'abord vérifier dans
                 // quel contexte on se trouve :

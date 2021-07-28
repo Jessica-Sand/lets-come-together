@@ -42,7 +42,7 @@
 							<a href="{{ path('admin_style_edit', {id:genre.id}) }}" class="btn btn-outline-success">Editer</a>
 						</td>
 						<td>
-							<a href="{{ path('admin_style_delete', {id:genre.id, token:csrf_token('delete-item')}) }}" class="btn btn-outline-danger">Supprimer</a>
+							<a href="{{ path('admin_style_delete', {id:genre.id, token:csrf_token('delete-style')}) }}" class="btn btn-outline-danger">Supprimer</a>
 						</td>
 					</tr>
 				{% endfor %}
