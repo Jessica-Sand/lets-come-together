@@ -78,12 +78,15 @@ class InstrumentController extends AbstractController
      * @Route("/{id}/edit", name="edit")
      * @return void
      */
-    public function edit(Instrument $instrument, Request $request): Response
+    public function edit(Instrument $instrument, Request $request, ImageUploader $imageUploader): Response
     {
         $form = $this->createForm(InstrumentType::class, $instrument);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $newFileName = $imageUploader->upload($form, 'icon');
+
+            $instrument->setIcon($newFileName);
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'Le style de musique ' . $instrument->getName() . ' a bien été mis à jour');

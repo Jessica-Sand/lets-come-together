@@ -25,9 +25,10 @@ class InstrumentType extends AbstractType
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
-                            'image/png'
+                            'image/png',
+                            'image/jpeg'
                         ],
-                        'mimeTypesMessage' => 'Veuillez ajouter une image valide',
+                        'mimeTypesMessage' => 'Veuillez ajouter une image valide'
                     ])
                 ]
             ])
