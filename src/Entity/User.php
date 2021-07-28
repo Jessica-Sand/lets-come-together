@@ -170,7 +170,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $cities;
 
     /**
-     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="author")
      */
     private $messages;
 
@@ -525,7 +525,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->messages->contains($message)) {
             $this->messages[] = $message;
-            $message->setUser($this);
+            $message->setAuthor($this);
         }
 
         return $this;
@@ -535,8 +535,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->messages->removeElement($message)) {
             // set the owning side to null (unless already changed)
-            if ($message->getUser() === $this) {
-                $message->setUser(null);
+            if ($message->getAuthor() === $this) {
+                $message->setAuthor(null);
             }
         }
 

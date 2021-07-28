@@ -31,7 +31,7 @@ class ChannelController extends AbstractController
     {
         $messages = $messageRepository->findBy([
             'channel' => $channel
-        ], ['createdAt' => 'ASC']);
+        ], ['created_at' => 'ASC']);
 
         return $this->render('channel/chat.html.twig', [
             'channel' => $channel,

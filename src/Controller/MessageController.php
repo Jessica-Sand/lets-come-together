@@ -6,8 +6,9 @@ use App\Entity\Message;
 use App\Repository\ChannelRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -25,7 +26,7 @@ class MessageController extends AbstractController
         }
 
         $channel = $channelRepository->findOneBy([
-            'id' => $data['channel'] // try to find whiwh channel the message comes from 
+            'id' => $data['channel'] // try to find which channel the message comes from 
         ]);
         if (!$channel) {
             throw new AccessDeniedHttpException('Message have to be sent on a specific channel');
@@ -34,7 +35,7 @@ class MessageController extends AbstractController
         $message = new Message(); // after validation, create the new message
         $message->setContent($content);
         $message->setChannel($channel);
-        $message->setUser($this->getUser()); // give them the name of the current user 
+        $message->setAuthor($this->getUser()); // give them the name of the current user 
 
         $em->persist($message);
         $em->flush(); // saved it in the DB
