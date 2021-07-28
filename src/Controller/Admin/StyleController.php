@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("style", name="admin_style_", requirements={"index" = "\d+"})
+ * @Route("style", name="admin_style_", requirements={"id" = "\d+"})
  * @IsGranted("ROLE_ADMIN")
  */
 class StyleController extends AbstractController
@@ -90,10 +90,10 @@ class StyleController extends AbstractController
     }
 
     /**
-     * @Route("/delete", name="delete")
+     * @Route("/{id}/delete", name="delete")
      * @return void
      */
-    public function delete(int $id, StyleRepository $styleRepository, Request $request)
+    public function delete($id, StyleRepository $styleRepository, Request $request)
     {
         $submittedToken = $request->get('token');
 

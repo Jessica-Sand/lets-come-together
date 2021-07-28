@@ -140,7 +140,7 @@ class AppFixtures extends Fixture
         $adminUser2->setEmail('carlos.or.pro@gmail.com');
         $adminUser2->setFirstname('Carlos');
         $adminUser2->setLastname('Ortiz');
-        $adminUser2->setRoles(['ROLE_SUPER_ADMIN']);
+        $adminUser2->setRoles(['ROLE_ADMIN']);
         $adminUser2->setPassword($this->passwordHasher->hashPassword(
             $adminUser2,
             '123456'

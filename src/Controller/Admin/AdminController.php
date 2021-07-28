@@ -26,8 +26,8 @@ class AdminController extends AbstractController
     public function index(StyleRepository $styleRepository, InstrumentRepository $instrumentRepository): Response
     {
         return $this->render('admin/layout.html.twig', [
-            'genres' => $styleRepository,
-            'instruments' => $instrumentRepository
+            'styles' => $styleRepository->findFiveFirst(),
+            'instruments' => $instrumentRepository->findFiveFirst()
         ]);
     }
 

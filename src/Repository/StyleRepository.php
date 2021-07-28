@@ -19,6 +19,20 @@ class StyleRepository extends ServiceEntityRepository
         parent::__construct($registry, Style::class);
     }
 
+    /**
+     * Method to find the 5 first styles
+     */
+    public function findFiveFirst()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT style
+            FROM App\Entity\Style style'
+        )
+        ->setMaxResults(5);
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Style[] Returns an array of Style objects
     //  */

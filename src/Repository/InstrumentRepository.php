@@ -19,6 +19,20 @@ class InstrumentRepository extends ServiceEntityRepository
         parent::__construct($registry, Instrument::class);
     }
 
+    /**
+     * Method to find the 5 first instruments
+     */
+    public function findFiveFirst()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT instrument
+            FROM App\Entity\Instrument instrument'
+        )
+        ->setMaxResults(5);
+        return $query->getResult();
+    }
+
     // /**
     //  * @return Instrument[] Returns an array of Instrument objects
     //  */

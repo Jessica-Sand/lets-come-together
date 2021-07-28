@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}
     Musiciens |
@@ -11,7 +11,7 @@
 			<div class="col-lg-6 col-md-8 mx-auto mb-4">
 				<h1 class="fw-light">
 					Administrateurs enregistrés
-				{% if app.user.roles == ["ROLE_ADMIN","ROLE_SUPER_ADMIN"] %}
+				{% if app.user.roles == ["ROLE_SUPER_ADMIN","ROLE_ADMIN"] %}
 				<a href="{{ path('admin_add') }}">
 					<button type="button" class="btn btn-success ">Ajouter</button>
 				</a>
