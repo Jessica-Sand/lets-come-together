@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chat{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.pseudo }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+    <h1>Channel {{ channel.name }}</h1>
+    <div class="container" style="height: 600px">
+        <div class="container bg-light h-75 overflow-auto">
+            {% for message in messages %}
+                {% if app.user == message.user %}
+                    <div class="row w-75 float-right">
+                        <b>{{ message.user.pseudo }}</b>
+                        <p class="alert alert-info w-100">
+                            {{ message.content }}
+                        </p>
+                    </div>
+                {% else %}
+                    <div class="row w-75 float-left">
+                        <b>{{ message.user.pseudo }}</b>
+                        <p class="alert alert-success w-100">
+                            {{ message.content }}
+                        </p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div>
+            <form id="form" class="container row"> 
+                <input id="message" class="input-group-text col-sm-9" placeholder="Message" type="text" />
+                <button id="submit" type="submit" class="btn btn-success col-sm-3">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+
+<!-- After preventing the browser from refreshing the page, we use the fetch API and the POST method to send the message to the server and bypass the native Symfony forms. So our behavior is a bit more like a client communicating with its API -->
+
+    <script>
+        let chatDiv = document.querySelector('.overflow-auto');
+        chatDiv.scrollTop = chatDiv.scrollHeight; // we want to scroll always to the last message 
+
+        let form = document.getElementById('form');
+        function handleForm(event) {
+            event.preventDefault(); // prevents the page from refreshin after the form is submitted
+        }
+        form.addEventListener('submit', handleForm);
+
+        const submit = document.querySelector('button');
+        submit.onclick = e => { // changing the behavior of the submit
+            const message = document.getElementById('message'); // Recovering the message in the correct input
+            const data = { // the data variable will be sent to the controller
+                'content': message.value, // transmit the message
+                'channel': {{ channel.id }} // and the right channel
+            }
+            console.log(data); // check the information
+            fetch('/message', { // sending with a post the data on the endpoint/message of the application
+                method: 'POST',
+                body: JSON.stringify(data) // transmit the data in JSON
+            }).then((response) => {
+                message.value = '';
+                console.log(response);
+            });
+        }
+    </script>
+{% endblock %}
