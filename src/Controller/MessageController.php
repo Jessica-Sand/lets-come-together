@@ -2,19 +2,51 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
+use App\Repository\ChannelRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class MessageController extends AbstractController
 {
     /**
-     * @Route("/message", name="message")
+     * @Route("/message", name="message", methods={"POST"})
      */
-    public function index(): Response
+    public function sendMessage(Request $request, ChannelRepository $channelRepository, SerializerInterface $serializer, EntityManagerInterface $em): JsonResponse
     {
-        return $this->render('message/index.html.twig', [
-            'controller_name' => 'MessageController',
+        $data = \json_decode($request->getContent(), true); // deserialize the data posted and recovered
+        if (empty($content = $data['content'])) {
+            throw new AccessDeniedHttpException('No data sent');
+        }
+
+        $channel = $channelRepository->findOneBy([
+            'id' => $data['channel'] // try to find whiwh channel the message comes from 
         ]);
+        if (!$channel) {
+            throw new AccessDeniedHttpException('Message have to be sent on a specific channel');
+        }
+
+        $message = new Message(); // after validation, create the new message
+        $message->setContent($content);
+        $message->setChannel($channel);
+        $message->setUser($this->getUser()); // give them the name of the current user 
+
+        $em->persist($message);
+        $em->flush(); // saved it in the DB
+
+        $jsonMessage = $serializer->serialize($message, 'json', [
+            'groups' => ['message'] // serialize the response before to send it
+        ]);
+
+        return new JsonResponse( // return the response
+            $jsonMessage,
+            Response::HTTP_OK,
+            [],
+            true);
     }
 }
