@@ -39,7 +39,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}/edit", name="users_edit", methods={"PUT|PATCH"})
+     * @Route("/users/{id}", name="users_edit", methods={"PUT|PATCH"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function edit(User $user, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
@@ -78,5 +78,23 @@ class UserController extends AbstractController
         return $this->json([
             'message' => 'Le compte à bien été supprimé'
         ], 204);
+    }
+
+    /**
+     * @Route("/search", name="search", methods={"GET"})
+     */
+    public function seacrh(UserRepository $userRepository, Request $request): Response
+    {
+        // dd(json_decode($request->getContent()), true);
+        $array = [
+            'gender' => 1,
+            'Departments' => 20,
+            'availability' => 7,
+            'style' => [21,22],
+            'instrument' => [42,43]
+        ];
+        return $this->json($userRepository->detailSearch($array), 200, [], [
+            'groups' => 'User',
+        ]);
     }
 }

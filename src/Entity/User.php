@@ -159,6 +159,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\ManyToOne(targetEntity=Gender::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="Veuillez renseigner votre sexe")
+     * @Groups({"User"})
      */
     private $gender;
 
