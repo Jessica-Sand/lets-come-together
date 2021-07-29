@@ -17,6 +17,10 @@
 </section>
 
 <div class="container">
-    {{ form(form) }}
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+	{{ form_row(form.icon) }}
+	{{ form_row(form.save) }}
+	{{ form_end(form) }}
 </div>
 {% endblock %}

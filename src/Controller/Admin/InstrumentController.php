@@ -84,9 +84,10 @@ class InstrumentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $newFileName = $imageUploader->upload($form, 'icon');
-
-            $instrument->setIcon($newFileName);
+            if($form->has('icon')){
+                $newFileName = $imageUploader->upload($form, 'icon');
+                $instrument->setIcon($newFileName);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'Le style de musique ' . $instrument->getName() . ' a bien été mis à jour');

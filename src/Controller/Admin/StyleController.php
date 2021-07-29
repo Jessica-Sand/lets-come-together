@@ -81,7 +81,7 @@ class StyleController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'Le style de musique ' . $style->getName() . ' a bien été mis à jour');
-            return $this->redirectToRoute('admin_style_show', ['id' => $style->getId()]);
+            return $this->redirectToRoute('admin_style_list', ['id' => $style->getId()]);
         }
         return $this->render('admin/style/edit.html.twig', [
             'form' => $form->createView(),
