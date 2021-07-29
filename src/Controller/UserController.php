@@ -39,7 +39,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}/edit", name="users_edit", methods={"PUT|PATCH"})
+     * @Route("/users/{id}", name="users_edit", methods={"PUT|PATCH"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function edit(User $user, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
