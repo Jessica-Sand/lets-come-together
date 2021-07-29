@@ -54,6 +54,34 @@
         }
         form.addEventListener('submit', handleForm);
 
+        // In the Hub URL, 'mercure' is used as the docker-compose service name. We replace it by the actual localhost url for the browser.
+        const link = '{{ app.request.attributes.get('_links').getLinksbyRel('mercure')[0].getHref }}'
+            .replace("mercure", "localhost:3000");
+        const url = new URL(link);
+
+        url.searchParams.append('topic', 'http://astrochat.com/channel/{{ channel.id }}'); // adding the topic to the parameters of the request to the Hub
+
+        const eventSource = new EventSource(url, {withCredentials: true}); // We added the "withCredentials". Thus the request will be accompanied by the JWT present in the cookie!
+
+        const appUser = {{ app.user.id }};
+
+        eventSource.onmessage = ({data}) => { // listen to the event published by the Hub
+            const message = JSON.parse(data); // the content is in JSON, need to parsed it
+                document.querySelector('.bg-light').insertAdjacentHTML( // injection of the new message in the HTML
+                'beforeend',
+                    appUser === message.author.id ?
+                    `<div class="row w-75 float-right">
+                    <b>${message.author.username}</b>
+                    <p class="alert alert-info w-100">${message.content}</p>
+                </div>` :
+                    `<div class="row w-75 float-left">
+                    <b>${message.author.username}</b>
+                    <p class="alert alert-success w-100">${message.content}</p>
+                </div>`
+            )
+            chatDiv.scrollTop = chatDiv.scrollHeight; // ask to the browser to scroll the chat at the bottom to see the last message 
+        }
+
         const submit = document.querySelector('button');
         submit.onclick = e => { // changing the behavior of the submit
             const message = document.getElementById('message'); // Recovering the message in the correct input
