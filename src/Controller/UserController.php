@@ -84,10 +84,11 @@ class UserController extends AbstractController
     /**
      * @Route("/advanced-search", name="_advanced_search", methods={"GET"})
      */
-    public function advancedSearch(UserRepository $userRepository, Request $request): Response
+    public function advancedSearch(UserRepository $userRepository): Response
     {
-        
-        $array = json_decode($request->getContent(), true);
+        $array = $_GET;
+        $array['style'] = urldecode($_GET['style']);
+        $array['instrument'] = urldecode($_GET['instrument']);
         return $this->json($userRepository->detailSearch($array), 200, [], [
             'groups' => 'User',
         ]);
@@ -96,7 +97,7 @@ class UserController extends AbstractController
     /**
      * @Route("/search", name="search", methods={"GET"})
      */
-    public function Search(UserRepository $userRepository, Request $request): Response
+    public function Search(UserRepository $userRepository): Response
     {
         $array = $_GET;
         return $this->json($userRepository->search($array), 200, [], [
