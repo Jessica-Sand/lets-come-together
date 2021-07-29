@@ -44,6 +44,7 @@ class UserController extends AbstractController
      */
     public function edit(User $user, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
     {
+        dd($request);
        $jsonData = $request->getContent();
 
        $user = $serializer->deserialize($jsonData, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
@@ -81,19 +82,23 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/advanced-search", name="_advanced_search", methods={"GET"})
+     */
+    public function advancedSearch(UserRepository $userRepository, Request $request): Response
+    {
+        $array = json_decode($request->getContent(), true);
+        return $this->json($userRepository->detailSearch($array), 200, [], [
+            'groups' => 'User',
+        ]);
+    }
+
+    /**
      * @Route("/search", name="search", methods={"GET"})
      */
-    public function seacrh(UserRepository $userRepository, Request $request): Response
+    public function Search(UserRepository $userRepository, Request $request): Response
     {
-        // dd(json_decode($request->getContent()), true);
-        $array = [
-            'gender' => 1,
-            'Departments' => 20,
-            'availability' => 7,
-            'style' => [21,22],
-            'instrument' => [42,43]
-        ];
-        return $this->json($userRepository->detailSearch($array), 200, [], [
+        $array = json_decode($request->getContent(), true);
+        return $this->json($userRepository->search($array), 200, [], [
             'groups' => 'User',
         ]);
     }
