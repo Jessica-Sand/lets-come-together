@@ -87,8 +87,8 @@ class UserController extends AbstractController
     public function advancedSearch(UserRepository $userRepository): Response
     {
         $array = $_GET;
-        $array['style'] = urldecode($_GET['style']);
-        $array['instrument'] = urldecode($_GET['instrument']);
+        $array['style'] = json_decode(urldecode($_GET['style']));
+        $array['instrument'] = json_decode(urldecode($_GET['instrument']));
         return $this->json($userRepository->detailSearch($array), 200, [], [
             'groups' => 'User',
         ]);
