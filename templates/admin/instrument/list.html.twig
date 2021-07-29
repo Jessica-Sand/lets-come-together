@@ -27,7 +27,6 @@
 					<td>Nom</td>
 					<td>Icone</td>
 					<td></td>
-					<td></td>
                     <td></td>
 				</tr>
 			</thead>
@@ -37,10 +36,7 @@
 						<td>{{instrument.id}}</td>
 						<td>{{instrument.name}}</td>
                         <td>
-							<img src="{{ asset('uploads/images/' ~ instrument.icon) }}">
-						</td>
-						<td>
-							<a href="{{ path('admin_instrument_show', {id:instrument.id}) }}" class="btn btn-outline-success">Voir</a>
+							<img src="{{ asset('uploads/images/' ~ instrument.icon) }}" width="50">
 						</td>
 						<td>
 							<a href="{{ path('admin_instrument_edit', {id:instrument.id}) }}" class="btn btn-outline-success">Editer</a>

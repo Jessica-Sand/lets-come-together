@@ -50,6 +50,42 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $query->getResult();
     }
 
+    /**
+     * Method to find all the musiciens with satus active (true)
+     */
+    public function detailSearch($array)
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->where('u.status = 0');
+        
+        if(!empty($array['gender'])){
+            $qb->leftJoin('u.gender', 'gender');
+            $qb->andWhere('gender.id = :index');
+            $qb->setParameter(':index', $array['gender']);
+        }
+
+        if(!empty($array['Departments'])){
+            $qb->leftJoin('u.department', 'department');
+            $qb->andWhere('department.id = :index');
+            $qb->setParameter(':index', $array['Departments']);
+        }
+
+        if(!empty($array['availability'])){
+            $qb->leftJoin('u.availability', 'availability');
+            $qb->andWhere('availability.id = :index');
+            $qb->setParameter(':index', $array['availability']);
+        }
+
+        if(!empty($array['style'])){
+            $qb->leftJoin('u.style', 'style');
+            $qb->andWhere('availability.id = :index');
+            $qb->setParameter(':index', $array['availability']);
+        }
+
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
