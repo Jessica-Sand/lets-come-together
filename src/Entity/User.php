@@ -152,6 +152,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Availability::class, inversedBy="gender")
+     * @Groups({"User"})
      */
     private $availability;
 
