@@ -20,7 +20,7 @@ class Instrument
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"instruments"})
+     * @Groups({"instruments", "User"})
      */
     private $id;
 
