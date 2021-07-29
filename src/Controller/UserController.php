@@ -86,6 +86,7 @@ class UserController extends AbstractController
      */
     public function advancedSearch(UserRepository $userRepository, Request $request): Response
     {
+        
         $array = json_decode($request->getContent(), true);
         return $this->json($userRepository->detailSearch($array), 200, [], [
             'groups' => 'User',
@@ -97,7 +98,7 @@ class UserController extends AbstractController
      */
     public function Search(UserRepository $userRepository, Request $request): Response
     {
-        $array = json_decode($request->getContent(), true);
+        $array = $_GET;
         return $this->json($userRepository->search($array), 200, [], [
             'groups' => 'User',
         ]);
