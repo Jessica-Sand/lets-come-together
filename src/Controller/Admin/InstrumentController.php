@@ -91,7 +91,7 @@ class InstrumentController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
             $this->addFlash('success', 'Le style de musique ' . $instrument->getName() . ' a bien été mis à jour');
-            return $this->redirectToRoute('admin_instrument_show', ['id' => $instrument->getId()]);
+            return $this->redirectToRoute('admin_instrument_list', ['id' => $instrument->getId()]);
         }
         return $this->render('admin/instrument/edit.html.twig', [
             'form' => $form->createView(),

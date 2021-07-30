@@ -138,5 +138,40 @@ class AdminController extends AbstractController
         ]);
     }
 
-    
+    function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+        if (($lat1 == $lat2) && ($lon1 == $lon2)) {
+          return 0;
+        }
+        else {
+          $theta = $lon1 - $lon2;
+          $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+          $dist = acos($dist);
+          $dist = rad2deg($dist);
+          $miles = $dist * 60 * 1.1515;
+          $unit = strtoupper($unit);
+      
+          if ($unit == "K") {
+            return ($miles * 1.609344);
+          } else if ($unit == "N") {
+            return ($miles * 0.8684);
+          } else {
+            return $miles;
+          }
+        }
+      }
+
+    /**
+     * @Route("/distance")
+     *
+     * @param [type] $lat1
+     * @param [type] $lng1
+     * @param [type] $lat2
+     * @param [type] $lng2
+     * @param boolean $miles
+     * @return void
+     */
+    public function distanceeee()
+    {
+        dd($this->distance(46.3833, 4.91667, 49.7667, 1.05, "K"));
+    }
 }
