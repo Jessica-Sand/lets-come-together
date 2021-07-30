@@ -19,7 +19,7 @@ class Gender
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"Genders"})
+     * @Groups({"Genders","User"})
      */
     private $id;
 
