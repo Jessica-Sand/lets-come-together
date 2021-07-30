@@ -27,7 +27,7 @@ class Message
     private $content;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true))
      */
     private $created_at;
 
@@ -42,7 +42,7 @@ class Message
      * @ORM\JoinColumn(nullable=false)
      * @Groups("message")
      */
-    private $author;
+    private UserInterface $author;
 
     public function __construct()
     {
@@ -90,12 +90,12 @@ class Message
         return $this;
     }
 
-    public function getAuthor(): ?User
+    public function getAuthor(): UserInterface
     {
         return $this->author;
     }
 
-    public function setAuthor(?User $author): self
+    public function setAuthor(UserInterface $author): self
     {
         $this->author = $author;
 

@@ -19,7 +19,13 @@ class ChannelRepository extends ServiceEntityRepository
         parent::__construct($registry, Channel::class);
     }
 
-    
+    /**
+     * Finding users to give a name to the channel with their ids
+     *
+     * @param [type] $idSender
+     * @param [type] $idReceiver
+     * @return void
+     */
     public function findByUsers($idSender,$idReceiver)
     {
         return $this->createQueryBuilder('c')

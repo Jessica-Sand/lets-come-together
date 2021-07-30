@@ -24,13 +24,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"User"})
+     * @Groups({"User", "message"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"User"})
+     * @Groups({"User", "message"})
      * @Assert\NotBlank(message="Veuiller renseigner votre Prénom")
      */
     private $firstname;

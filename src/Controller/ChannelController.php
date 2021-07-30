@@ -24,12 +24,12 @@ class ChannelController extends AbstractController
         $channels = $channelRepository->findAll();
 
         return $this->render('channel/index.html.twig', [
-            'channels' => $channels ?? []
+            'channels' => $channels ?? [],
         ]);
     }
 
     /**
-     * @Route("/chat/{id}", name="chat")
+     * @Route("/chat/{user}", name="chat", requirements={"id"="\d+"})
      */
     public function chat(Request $request, Channel $channel, MessageRepository $messageRepository, CookieJwtProvider $cookieJwtProvider): Response
     {
@@ -41,8 +41,8 @@ class ChannelController extends AbstractController
         $this->addLink($request, new Link('mercure', $hubUrl));
 
          $response = $this->render('channel/chat.html.twig', [
-        'channel' => $channel,
-        'messages' => $messages
+            'channel' => $channel,
+            'messages' => $messages
         ]);
         
         $response->headers->setCookie(

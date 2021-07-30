@@ -63,7 +63,7 @@
 
         const eventSource = new EventSource(url, {withCredentials: true}); // We added the "withCredentials". Thus the request will be accompanied by the JWT present in the cookie!
 
-        const appUser = {{ app.user.id }};
+        const appUser = {{ user.id }};
 
         eventSource.onmessage = ({data}) => { // listen to the event published by the Hub
             const message = JSON.parse(data); // the content is in JSON, need to parsed it
