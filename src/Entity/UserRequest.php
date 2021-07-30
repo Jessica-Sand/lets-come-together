@@ -3,7 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\UserRequestRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRequestRepository::class)
@@ -19,21 +21,25 @@ class UserRequest
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(message="Veuillez saisir un prénom")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\NotBlank(message="Veuillez renseigner un email")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Veuillez ajouter un sujet")
      */
     private $subject;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Veuillez ajouter un message")
      */
     private $message;
 
@@ -46,6 +52,11 @@ class UserRequest
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
+    public function __construct()
+    {
+        $this->created_at = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

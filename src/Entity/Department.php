@@ -20,7 +20,7 @@ class Department
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"Departments"})
+     * @Groups({"Departments", "User"})
      */
     private $id;
 

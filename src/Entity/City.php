@@ -19,7 +19,7 @@ class City
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"Cities"})
+     * @Groups({"Cities", "User"})
      */
     private $id;
 
