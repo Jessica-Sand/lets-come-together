@@ -54,11 +54,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}/edit", name="users_edit", methods={"PUT|PATCH"})
+     * @Route("/users/{id}", name="users_edit", methods={"PUT|PATCH"})
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function edit(User $user, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
     {
+        dd($request);
        $jsonData = $request->getContent();
 
        $user = $serializer->deserialize($jsonData, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
@@ -93,5 +94,29 @@ class UserController extends AbstractController
         return $this->json([
             'message' => 'Le compte à bien été supprimé'
         ], 204);
+    }
+
+    /**
+     * @Route("/advanced-search", name="_advanced_search", methods={"GET"})
+     */
+    public function advancedSearch(UserRepository $userRepository): Response
+    {
+        $array = $_GET;
+        $array['style'] = json_decode(urldecode($_GET['style']));
+        $array['instrument'] = json_decode(urldecode($_GET['instrument']));
+        return $this->json($userRepository->detailSearch($array), 200, [], [
+            'groups' => 'User',
+        ]);
+    }
+
+    /**
+     * @Route("/search", name="search", methods={"GET"})
+     */
+    public function Search(UserRepository $userRepository): Response
+    {
+        $array = $_GET;
+        return $this->json($userRepository->search($array), 200, [], [
+            'groups' => 'User',
+        ]);
     }
 }

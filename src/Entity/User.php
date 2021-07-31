@@ -152,6 +152,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Availability::class, inversedBy="gender")
+     * @Groups({"User"})
      */
     private $availability;
 
@@ -159,6 +160,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\ManyToOne(targetEntity=Gender::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotBlank(message="Veuillez renseigner votre sexe")
+     * @Groups({"User"})
      */
     private $gender;
 

@@ -50,6 +50,76 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $query->getResult();
     }
 
+    
+    public function search($array)
+    {   
+        if (!empty($array)) {
+            $qb = $this->createQueryBuilder('u');
+            $qb->where('u.status = 1');
+        
+            if (!empty($array['instrument'])) {
+                $qb->leftJoin('u.Instruments', 'Instruments');
+                $qb->andWhere('Instruments.id = :index');
+                $qb->setParameter(':index', $array['instrument']);
+            }
+
+            if (!empty($array['Departments'])) {
+                $qb->leftJoin('u.Departments', 'Departments');
+                $qb->andWhere('Departments.id = :id');
+                $qb->setParameter(':id', $array['Departments']);
+            }
+
+            $query = $qb->getQuery();
+            return $query->execute();
+        }
+    }
+
+    
+    public function detailSearch($array)
+    {
+        if (!empty($array)) {
+            $qb = $this->createQueryBuilder('u');
+            $qb->where('u.status = 1');
+        
+            if (!empty($array['gender'])) {
+                $qb->leftJoin('u.gender', 'gender');
+                $qb->andWhere('gender.id = :index');
+                $qb->setParameter(':index', $array['gender']);
+            }
+
+            if (!empty($array['Departments'])) {
+                $qb->leftJoin('u.Departments', 'Departments');
+                $qb->andWhere('Departments.id = :id');
+                $qb->setParameter(':id', $array['Departments']);
+            }
+
+            if (!empty($array['availability'])) {
+                $qb->leftJoin('u.availability', 'availability');
+                $qb->andWhere('availability.id = :numero');
+                $qb->setParameter(':numero', $array['availability']);
+            }
+
+            if (!empty($array['style'])) {
+                $qb->leftJoin('u.styles', 'styles');
+                foreach ($array['style'] as $key => $id) {
+                    $qb->andWhere('styles.id = :chiffre');
+                    $qb->setParameter(':chiffre', $id);
+                }
+            }
+
+            if (!empty($array['instrument'])) {
+                $qb->leftJoin('u.Instruments', 'Instruments');
+                foreach ($array['instrument'] as $key => $id) {
+                    $qb->andWhere('Instruments.id = :i');
+                    $qb->setParameter(':i', $id);
+                }
+            }
+
+            $query = $qb->getQuery();
+            return $query->execute();
+        }
+    }
+
     // /**
     //  * Method for the advanced search
     //  */

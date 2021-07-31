@@ -20,7 +20,7 @@ class Instrument
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"instruments"})
+     * @Groups({"instruments", "User"})
      */
     private $id;
 
@@ -33,7 +33,6 @@ class Instrument
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(message="Veuillez ajouter une icone")
      */
     private $icon;
 
