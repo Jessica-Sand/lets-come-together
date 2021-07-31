@@ -104,7 +104,23 @@ class __TwigTemplate_b2675a88d8e9bcd059f36fb24cefdc898d270cc76596b7d231c9cb84293
 <div class=\"container\">
     ";
         // line 20
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 20, $this->source); })()), 'form', ["attr" => ["novalidate" => "novalidate"]]);
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 20, $this->source); })()), 'form_start');
+        echo "
+    ";
+        // line 21
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 21, $this->source); })()), "name", [], "any", false, false, false, 21), 'row');
+        echo "
+\t";
+        // line 22
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 22, $this->source); })()), "icon", [], "any", false, false, false, 22), 'row');
+        echo "
+\t";
+        // line 23
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 23, $this->source); })()), "save", [], "any", false, false, false, 23), 'row');
+        echo "
+\t";
+        // line 24
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 24, $this->source); })()), 'form_end');
         echo "
 </div>
 ";
@@ -128,7 +144,7 @@ class __TwigTemplate_b2675a88d8e9bcd059f36fb24cefdc898d270cc76596b7d231c9cb84293
 
     public function getDebugInfo()
     {
-        return array (  107 => 20,  94 => 9,  84 => 8,  72 => 5,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  123 => 24,  119 => 23,  115 => 22,  111 => 21,  107 => 20,  94 => 9,  84 => 8,  72 => 5,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -152,7 +168,11 @@ class __TwigTemplate_b2675a88d8e9bcd059f36fb24cefdc898d270cc76596b7d231c9cb84293
 </section>
 
 <div class=\"container\">
-    {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+\t{{ form_row(form.icon) }}
+\t{{ form_row(form.save) }}
+\t{{ form_end(form) }}
 </div>
 {% endblock %}", "admin/instrument/add.html.twig", "/var/www/html/Apo/letscometogether/templates/admin/instrument/add.html.twig");
     }

@@ -16,6 +16,7 @@ return [
         '/' => [[['_route' => 'admin_home', '_controller' => 'App\\Controller\\Admin\\AdminController::index'], null, null, null, false, false, null]],
         '/add' => [[['_route' => 'admin_add', '_controller' => 'App\\Controller\\Admin\\AdminController::add'], null, null, null, false, false, null]],
         '/list' => [[['_route' => 'admin_list', '_controller' => 'App\\Controller\\Admin\\AdminController::list'], null, null, null, false, false, null]],
+        '/distance' => [[['_route' => 'admin_app_admin_admin_distanceeee', '_controller' => 'App\\Controller\\Admin\\AdminController::distanceeee'], null, null, null, false, false, null]],
         '/instrument/list' => [[['_route' => 'admin_instrument_list', '_controller' => 'App\\Controller\\Admin\\InstrumentController::list'], null, null, null, false, false, null]],
         '/instrument/add' => [[['_route' => 'admin_instrument_add', '_controller' => 'App\\Controller\\Admin\\InstrumentController::add'], null, null, null, false, false, null]],
         '/style/list' => [[['_route' => 'admin_style_list', '_controller' => 'App\\Controller\\Admin\\StyleController::list'], null, null, null, false, false, null]],
@@ -30,10 +31,13 @@ return [
         '/api/v1/instruments' => [[['_route' => 'api_v1_instruments', '_controller' => 'App\\Controller\\InstrumentController::list'], null, ['GET' => 0], null, false, false, null]],
         '/message' => [[['_route' => 'message', '_controller' => 'App\\Controller\\MessageController::sendMessage'], null, ['POST' => 0], null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, ['POST' => 0], null, false, false, null]],
+        '/api/v1/contact' => [[['_route' => 'api_v1_contact', '_controller' => 'App\\Controller\\RequestUserController::contact'], null, null, null, false, false, null]],
         '/login' => [[['_route' => 'app_login', '_controller' => 'App\\Controller\\SecurityController::login'], null, null, null, false, false, null]],
         '/logout' => [[['_route' => 'app_logout', '_controller' => 'App\\Controller\\SecurityController::logout'], null, null, null, false, false, null]],
         '/api/v1/styles' => [[['_route' => 'api_v1_styles', '_controller' => 'App\\Controller\\StyleController::list'], null, null, null, false, false, null]],
         '/api/v1/users' => [[['_route' => 'api_v1_users_list', '_controller' => 'App\\Controller\\UserController::list'], null, ['GET' => 0], null, false, false, null]],
+        '/api/v1/advanced-search' => [[['_route' => 'api_v1__advanced_search', '_controller' => 'App\\Controller\\UserController::advancedSearch'], null, ['GET' => 0], null, false, false, null]],
+        '/api/v1/search' => [[['_route' => 'api_v1_search', '_controller' => 'App\\Controller\\UserController::Search'], null, ['GET' => 0], null, false, false, null]],
         '/api/login_check' => [[['_route' => 'api_login_check'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
@@ -79,13 +83,12 @@ return [
                     .'|users/(?'
                         .'|([^/]++)(?'
                             .'|(*:560)'
-                            .'|/edit(*:573)'
                         .')'
-                        .'|(\\d+)(*:587)'
+                        .'|(\\d+)(*:574)'
                     .')'
                 .')'
-                .'|/chat/([^/]++)(*:611)'
-                .'|/_error/(\\d+)(?:\\.([^/]++))?(*:647)'
+                .'|/chat/([^/]++)(*:598)'
+                .'|/_error/(\\d+)(?:\\.([^/]++))?(*:634)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -112,11 +115,13 @@ return [
         481 => [[['_route' => 'api_v1_genders_users', '_controller' => 'App\\Controller\\GenderController::show'], ['id'], null, null, false, true, null]],
         509 => [[['_route' => 'api_v1_instruments_users', '_controller' => 'App\\Controller\\InstrumentController::show'], ['id'], ['GET' => 0], null, false, true, null]],
         532 => [[['_route' => 'api_v1_styles_users', '_controller' => 'App\\Controller\\StyleController::show'], ['id'], null, null, false, true, null]],
-        560 => [[['_route' => 'api_v1_users_show', '_controller' => 'App\\Controller\\UserController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        573 => [[['_route' => 'api_v1_users_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], ['PUT' => 0, 'PATCH' => 1], null, false, false, null]],
-        587 => [[['_route' => 'api_v1_users_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        611 => [[['_route' => 'chat', '_controller' => 'App\\Controller\\ChannelController::chat'], ['user'], null, null, false, true, null]],
-        647 => [
+        560 => [
+            [['_route' => 'api_v1_users_show', '_controller' => 'App\\Controller\\UserController::show'], ['id'], ['GET' => 0], null, false, true, null],
+            [['_route' => 'api_v1_users_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], ['PUT' => 0, 'PATCH' => 1], null, false, true, null],
+        ],
+        574 => [[['_route' => 'api_v1_users_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
+        598 => [[['_route' => 'chat', '_controller' => 'App\\Controller\\ChannelController::chat'], ['user'], null, null, false, true, null]],
+        634 => [
             [['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

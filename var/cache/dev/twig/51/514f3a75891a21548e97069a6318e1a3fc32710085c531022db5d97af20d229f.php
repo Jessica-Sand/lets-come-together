@@ -115,48 +115,41 @@ class __TwigTemplate_b5c28f1c00a001abcdeb349c52fe82a3b9fb78dbfe69388ba51448d99aa
 \t\t\t\t\t<td>Nom</td>
 \t\t\t\t\t<td>Icone</td>
 \t\t\t\t\t<td></td>
-\t\t\t\t\t<td></td>
                     <td></td>
 \t\t\t\t</tr>
 \t\t\t</thead>
 \t\t\t<tbody>
 \t\t\t\t";
-        // line 35
+        // line 34
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["instruments"]) || array_key_exists("instruments", $context) ? $context["instruments"] : (function () { throw new RuntimeError('Variable "instruments" does not exist.', 35, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["instruments"]) || array_key_exists("instruments", $context) ? $context["instruments"] : (function () { throw new RuntimeError('Variable "instruments" does not exist.', 34, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["instrument"]) {
-            // line 36
+            // line 35
             echo "\t\t\t\t\t<tr>
 \t\t\t\t\t\t<td>";
-            // line 37
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["instrument"], "id", [], "any", false, false, false, 37), "html", null, true);
+            // line 36
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["instrument"], "id", [], "any", false, false, false, 36), "html", null, true);
             echo "</td>
 \t\t\t\t\t\t<td>";
-            // line 38
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["instrument"], "name", [], "any", false, false, false, 38), "html", null, true);
+            // line 37
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["instrument"], "name", [], "any", false, false, false, 37), "html", null, true);
             echo "</td>
                         <td>
 \t\t\t\t\t\t\t<img src=\"";
-            // line 40
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/images/" . twig_get_attribute($this->env, $this->source, $context["instrument"], "icon", [], "any", false, false, false, 40))), "html", null, true);
-            echo "\">
+            // line 39
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("uploads/images/" . twig_get_attribute($this->env, $this->source, $context["instrument"], "icon", [], "any", false, false, false, 39))), "html", null, true);
+            echo "\" width=\"50\">
 \t\t\t\t\t\t</td>
 \t\t\t\t\t\t<td>
 \t\t\t\t\t\t\t<a href=\"";
-            // line 43
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_instrument_show", ["id" => twig_get_attribute($this->env, $this->source, $context["instrument"], "id", [], "any", false, false, false, 43)]), "html", null, true);
-            echo "\" class=\"btn btn-outline-success\">Voir</a>
-\t\t\t\t\t\t</td>
-\t\t\t\t\t\t<td>
-\t\t\t\t\t\t\t<a href=\"";
-            // line 46
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_instrument_edit", ["id" => twig_get_attribute($this->env, $this->source, $context["instrument"], "id", [], "any", false, false, false, 46)]), "html", null, true);
+            // line 42
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_instrument_edit", ["id" => twig_get_attribute($this->env, $this->source, $context["instrument"], "id", [], "any", false, false, false, 42)]), "html", null, true);
             echo "\" class=\"btn btn-outline-success\">Editer</a>
 \t\t\t\t\t\t</td>
 \t\t\t\t\t\t<td>
 \t\t\t\t\t\t\t<a href=\"";
-            // line 49
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_instrument_delete", ["id" => twig_get_attribute($this->env, $this->source, $context["instrument"], "id", [], "any", false, false, false, 49), "token" => $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("delete-instrument")]), "html", null, true);
+            // line 45
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_instrument_delete", ["id" => twig_get_attribute($this->env, $this->source, $context["instrument"], "id", [], "any", false, false, false, 45), "token" => $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("delete-instrument")]), "html", null, true);
             echo "\" class=\"btn btn-outline-danger\">Supprimer</a>
 \t\t\t\t\t\t</td>
 \t\t\t\t\t</tr>
@@ -165,7 +158,7 @@ class __TwigTemplate_b5c28f1c00a001abcdeb349c52fe82a3b9fb78dbfe69388ba51448d99aa
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['instrument'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 53
+        // line 49
         echo "\t\t\t</tbody>
 \t\t</table>
 \t</div>
@@ -190,7 +183,7 @@ class __TwigTemplate_b5c28f1c00a001abcdeb349c52fe82a3b9fb78dbfe69388ba51448d99aa
 
     public function getDebugInfo()
     {
-        return array (  169 => 53,  159 => 49,  153 => 46,  147 => 43,  141 => 40,  136 => 38,  132 => 37,  129 => 36,  125 => 35,  102 => 15,  94 => 9,  84 => 8,  72 => 5,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  162 => 49,  152 => 45,  146 => 42,  140 => 39,  135 => 37,  131 => 36,  128 => 35,  124 => 34,  102 => 15,  94 => 9,  84 => 8,  72 => 5,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -224,7 +217,6 @@ class __TwigTemplate_b5c28f1c00a001abcdeb349c52fe82a3b9fb78dbfe69388ba51448d99aa
 \t\t\t\t\t<td>Nom</td>
 \t\t\t\t\t<td>Icone</td>
 \t\t\t\t\t<td></td>
-\t\t\t\t\t<td></td>
                     <td></td>
 \t\t\t\t</tr>
 \t\t\t</thead>
@@ -234,10 +226,7 @@ class __TwigTemplate_b5c28f1c00a001abcdeb349c52fe82a3b9fb78dbfe69388ba51448d99aa
 \t\t\t\t\t\t<td>{{instrument.id}}</td>
 \t\t\t\t\t\t<td>{{instrument.name}}</td>
                         <td>
-\t\t\t\t\t\t\t<img src=\"{{ asset('uploads/images/' ~ instrument.icon) }}\">
-\t\t\t\t\t\t</td>
-\t\t\t\t\t\t<td>
-\t\t\t\t\t\t\t<a href=\"{{ path('admin_instrument_show', {id:instrument.id}) }}\" class=\"btn btn-outline-success\">Voir</a>
+\t\t\t\t\t\t\t<img src=\"{{ asset('uploads/images/' ~ instrument.icon) }}\" width=\"50\">
 \t\t\t\t\t\t</td>
 \t\t\t\t\t\t<td>
 \t\t\t\t\t\t\t<a href=\"{{ path('admin_instrument_edit', {id:instrument.id}) }}\" class=\"btn btn-outline-success\">Editer</a>

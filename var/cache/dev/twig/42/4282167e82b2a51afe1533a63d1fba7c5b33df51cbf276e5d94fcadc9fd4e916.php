@@ -126,15 +126,6 @@ class __TwigTemplate_5937f997408e76e978b65c7c5535a1a0fc5c5e2bdcedadc901ac9a5ed08
             echo "\" class=\"btn btn-sm btn-warning\">
                                             <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>
                                         </a>
-                                        <div class=\"btn-group\">
-                                            <button type=\"button\" class=\"btn btn-sm btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                                <i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>
-                                            </button>
-                                            <div class=\"dropdown-menu\">
-                                                <a class=\"dropdown-item\" href=\"#\">Oui, je veux supprimer</a>
-                                                <a class=\"dropdown-item\" href=\"#\" data-toggle=\"dropdown\">Oups !</a>
-                                            </div>
-                                        </div>
                                     </td>
                                 </tr>
                             ";
@@ -142,11 +133,11 @@ class __TwigTemplate_5937f997408e76e978b65c7c5535a1a0fc5c5e2bdcedadc901ac9a5ed08
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['instrument'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 43
+        // line 34
         echo "                            </tbody>
                         </table>
                         <a href=\"";
-        // line 45
+        // line 36
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_instrument_list");
         echo "\" class=\"btn btn-block btn-success\">Voir plus</a>
                     </div>
@@ -166,36 +157,27 @@ class __TwigTemplate_5937f997408e76e978b65c7c5535a1a0fc5c5e2bdcedadc901ac9a5ed08
                             </thead>
                             <tbody>
                             ";
-        // line 62
+        // line 53
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["styles"]) || array_key_exists("styles", $context) ? $context["styles"] : (function () { throw new RuntimeError('Variable "styles" does not exist.', 62, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["styles"]) || array_key_exists("styles", $context) ? $context["styles"] : (function () { throw new RuntimeError('Variable "styles" does not exist.', 53, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["style"]) {
-            // line 63
+            // line 54
             echo "                                <tr>
                                     <th scope=\"row\">";
-            // line 64
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["style"], "id", [], "any", false, false, false, 64), "html", null, true);
+            // line 55
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["style"], "id", [], "any", false, false, false, 55), "html", null, true);
             echo "</th>
                                     <td>";
-            // line 65
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["style"], "name", [], "any", false, false, false, 65), "html", null, true);
+            // line 56
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["style"], "name", [], "any", false, false, false, 56), "html", null, true);
             echo "</td>
                                     <td class=\"text-right\">
                                         <a href=\"";
-            // line 67
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_style_edit", ["id" => twig_get_attribute($this->env, $this->source, $context["style"], "id", [], "any", false, false, false, 67)]), "html", null, true);
+            // line 58
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_style_edit", ["id" => twig_get_attribute($this->env, $this->source, $context["style"], "id", [], "any", false, false, false, 58)]), "html", null, true);
             echo "\" class=\"btn btn-sm btn-warning\">
                                             <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>
                                         </a>
-                                    <div class=\"btn-group\">
-                                        <button type=\"button\" class=\"btn btn-sm btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                            <i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>
-                                        </button>
-                                        <div class=\"dropdown-menu\">
-                                            <a class=\"dropdown-item\" href=\"#\">Oui, je veux supprimer</a>
-                                            <a class=\"dropdown-item\" href=\"#\" data-toggle=\"dropdown\">Oups !</a>
-                                        </div>
-                                    </div>
                                     </td>
                                 </tr>
                             ";
@@ -203,11 +185,11 @@ class __TwigTemplate_5937f997408e76e978b65c7c5535a1a0fc5c5e2bdcedadc901ac9a5ed08
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['style'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 82
+        // line 64
         echo "                            </tbody>
                         </table>
                         <a href=\"";
-        // line 84
+        // line 66
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_style_list");
         echo "\" class=\"btn btn-block btn-success\">Voir plus</a>
                     </div>
@@ -237,7 +219,7 @@ class __TwigTemplate_5937f997408e76e978b65c7c5535a1a0fc5c5e2bdcedadc901ac9a5ed08
 
     public function getDebugInfo()
     {
-        return array (  211 => 84,  207 => 82,  186 => 67,  181 => 65,  177 => 64,  174 => 63,  170 => 62,  150 => 45,  146 => 43,  125 => 28,  120 => 26,  116 => 25,  113 => 24,  109 => 23,  92 => 8,  82 => 7,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  193 => 66,  189 => 64,  177 => 58,  172 => 56,  168 => 55,  165 => 54,  161 => 53,  141 => 36,  137 => 34,  125 => 28,  120 => 26,  116 => 25,  113 => 24,  109 => 23,  92 => 8,  82 => 7,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -272,15 +254,6 @@ class __TwigTemplate_5937f997408e76e978b65c7c5535a1a0fc5c5e2bdcedadc901ac9a5ed08
                                         <a href=\"{{ path('admin_instrument_edit', {id:instrument.id}) }}\" class=\"btn btn-sm btn-warning\">
                                             <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>
                                         </a>
-                                        <div class=\"btn-group\">
-                                            <button type=\"button\" class=\"btn btn-sm btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                                <i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>
-                                            </button>
-                                            <div class=\"dropdown-menu\">
-                                                <a class=\"dropdown-item\" href=\"#\">Oui, je veux supprimer</a>
-                                                <a class=\"dropdown-item\" href=\"#\" data-toggle=\"dropdown\">Oups !</a>
-                                            </div>
-                                        </div>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -311,15 +284,6 @@ class __TwigTemplate_5937f997408e76e978b65c7c5535a1a0fc5c5e2bdcedadc901ac9a5ed08
                                         <a href=\"{{ path('admin_style_edit', {id:style.id}) }}\" class=\"btn btn-sm btn-warning\">
                                             <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>
                                         </a>
-                                    <div class=\"btn-group\">
-                                        <button type=\"button\" class=\"btn btn-sm btn-danger dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                                            <i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>
-                                        </button>
-                                        <div class=\"dropdown-menu\">
-                                            <a class=\"dropdown-item\" href=\"#\">Oui, je veux supprimer</a>
-                                            <a class=\"dropdown-item\" href=\"#\" data-toggle=\"dropdown\">Oups !</a>
-                                        </div>
-                                    </div>
                                     </td>
                                 </tr>
                             {% endfor %}

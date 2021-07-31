@@ -115,41 +115,34 @@ class __TwigTemplate_d2f3839707a0a0b6b57f6c225b07410b1a4a545abc12827cf7e25eaa30b
 \t\t\t\t\t<td>Nom</td>
 \t\t\t\t\t<td></td>
 \t\t\t\t\t<td></td>
-\t\t\t\t\t<td></td>
 \t\t\t\t</tr>
 \t\t\t</thead>
 \t\t\t<tbody>
 \t\t\t\t";
-        // line 34
+        // line 33
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 34, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["genres"]) || array_key_exists("genres", $context) ? $context["genres"] : (function () { throw new RuntimeError('Variable "genres" does not exist.', 33, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["genre"]) {
-            // line 35
+            // line 34
             echo "\t\t\t\t\t<tr>
 \t\t\t\t\t\t<td>";
-            // line 36
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "id", [], "any", false, false, false, 36), "html", null, true);
+            // line 35
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "id", [], "any", false, false, false, 35), "html", null, true);
             echo "</td>
 \t\t\t\t\t\t<td>";
-            // line 37
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "name", [], "any", false, false, false, 37), "html", null, true);
+            // line 36
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["genre"], "name", [], "any", false, false, false, 36), "html", null, true);
             echo "</td>
 \t\t\t\t\t\t<td>
 \t\t\t\t\t\t\t<a href=\"";
-            // line 39
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_style_show", ["id" => twig_get_attribute($this->env, $this->source, $context["genre"], "id", [], "any", false, false, false, 39)]), "html", null, true);
-            echo "\" class=\"btn btn-outline-success\">Voir</a>
-\t\t\t\t\t\t</td>
-\t\t\t\t\t\t<td>
-\t\t\t\t\t\t\t<a href=\"";
-            // line 42
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_style_edit", ["id" => twig_get_attribute($this->env, $this->source, $context["genre"], "id", [], "any", false, false, false, 42)]), "html", null, true);
+            // line 38
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_style_edit", ["id" => twig_get_attribute($this->env, $this->source, $context["genre"], "id", [], "any", false, false, false, 38)]), "html", null, true);
             echo "\" class=\"btn btn-outline-success\">Editer</a>
 \t\t\t\t\t\t</td>
 \t\t\t\t\t\t<td>
 \t\t\t\t\t\t\t<a href=\"";
-            // line 45
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_style_delete", ["id" => twig_get_attribute($this->env, $this->source, $context["genre"], "id", [], "any", false, false, false, 45), "token" => $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("delete-style")]), "html", null, true);
+            // line 41
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin_style_delete", ["id" => twig_get_attribute($this->env, $this->source, $context["genre"], "id", [], "any", false, false, false, 41), "token" => $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderCsrfToken("delete-style")]), "html", null, true);
             echo "\" class=\"btn btn-outline-danger\">Supprimer</a>
 \t\t\t\t\t\t</td>
 \t\t\t\t\t</tr>
@@ -158,7 +151,7 @@ class __TwigTemplate_d2f3839707a0a0b6b57f6c225b07410b1a4a545abc12827cf7e25eaa30b
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['genre'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 49
+        // line 45
         echo "\t\t\t</tbody>
 \t\t</table>
 \t</div>
@@ -183,7 +176,7 @@ class __TwigTemplate_d2f3839707a0a0b6b57f6c225b07410b1a4a545abc12827cf7e25eaa30b
 
     public function getDebugInfo()
     {
-        return array (  162 => 49,  152 => 45,  146 => 42,  140 => 39,  135 => 37,  131 => 36,  128 => 35,  124 => 34,  102 => 15,  94 => 9,  84 => 8,  72 => 5,  69 => 4,  59 => 3,  36 => 1,);
+        return array (  155 => 45,  145 => 41,  139 => 38,  134 => 36,  130 => 35,  127 => 34,  123 => 33,  102 => 15,  94 => 9,  84 => 8,  72 => 5,  69 => 4,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -217,7 +210,6 @@ class __TwigTemplate_d2f3839707a0a0b6b57f6c225b07410b1a4a545abc12827cf7e25eaa30b
 \t\t\t\t\t<td>Nom</td>
 \t\t\t\t\t<td></td>
 \t\t\t\t\t<td></td>
-\t\t\t\t\t<td></td>
 \t\t\t\t</tr>
 \t\t\t</thead>
 \t\t\t<tbody>
@@ -225,9 +217,6 @@ class __TwigTemplate_d2f3839707a0a0b6b57f6c225b07410b1a4a545abc12827cf7e25eaa30b
 \t\t\t\t\t<tr>
 \t\t\t\t\t\t<td>{{genre.id}}</td>
 \t\t\t\t\t\t<td>{{genre.name}}</td>
-\t\t\t\t\t\t<td>
-\t\t\t\t\t\t\t<a href=\"{{ path('admin_style_show', {id:genre.id}) }}\" class=\"btn btn-outline-success\">Voir</a>
-\t\t\t\t\t\t</td>
 \t\t\t\t\t\t<td>
 \t\t\t\t\t\t\t<a href=\"{{ path('admin_style_edit', {id:genre.id}) }}\" class=\"btn btn-outline-success\">Editer</a>
 \t\t\t\t\t\t</td>

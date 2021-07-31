@@ -66,10 +66,10 @@ class City extends \App\Entity\City implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\City' . "\0" . 'id', '' . "\0" . 'App\\Entity\\City' . "\0" . 'name', '' . "\0" . 'App\\Entity\\City' . "\0" . 'created_at', '' . "\0" . 'App\\Entity\\City' . "\0" . 'updated_at', '' . "\0" . 'App\\Entity\\City' . "\0" . 'users'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\City' . "\0" . 'id', '' . "\0" . 'App\\Entity\\City' . "\0" . 'name', '' . "\0" . 'App\\Entity\\City' . "\0" . 'created_at', '' . "\0" . 'App\\Entity\\City' . "\0" . 'updated_at', '' . "\0" . 'App\\Entity\\City' . "\0" . 'users', '' . "\0" . 'App\\Entity\\City' . "\0" . 'latitude', '' . "\0" . 'App\\Entity\\City' . "\0" . 'longitude'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\City' . "\0" . 'id', '' . "\0" . 'App\\Entity\\City' . "\0" . 'name', '' . "\0" . 'App\\Entity\\City' . "\0" . 'created_at', '' . "\0" . 'App\\Entity\\City' . "\0" . 'updated_at', '' . "\0" . 'App\\Entity\\City' . "\0" . 'users'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\City' . "\0" . 'id', '' . "\0" . 'App\\Entity\\City' . "\0" . 'name', '' . "\0" . 'App\\Entity\\City' . "\0" . 'created_at', '' . "\0" . 'App\\Entity\\City' . "\0" . 'updated_at', '' . "\0" . 'App\\Entity\\City' . "\0" . 'users', '' . "\0" . 'App\\Entity\\City' . "\0" . 'latitude', '' . "\0" . 'App\\Entity\\City' . "\0" . 'longitude'];
     }
 
     /**
@@ -288,6 +288,50 @@ class City extends \App\Entity\City implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeUser', [$user]);
 
         return parent::removeUser($user);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getLatitude(): ?float
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLatitude', []);
+
+        return parent::getLatitude();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setLatitude(float $latitude): \App\Entity\City
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLatitude', [$latitude]);
+
+        return parent::setLatitude($latitude);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getLongitude(): ?float
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLongitude', []);
+
+        return parent::getLongitude();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setLongitude(float $longitude): \App\Entity\City
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLongitude', [$longitude]);
+
+        return parent::setLongitude($longitude);
     }
 
 }
