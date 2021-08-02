@@ -1,0 +1,4 @@
+b352c2,127.0.0.1,GET,http://localhost:8080/sockjs-node/info?t=1627907775666,1627907782,acb5a4,404
+acb5a4,127.0.0.1,GET,http://localhost:8080/sockjs-node/info?t=1627907775666,1627907782,,404
+6a4f14,127.0.0.1,GET,http://localhost:8080/sockjs-node/info?t=1627908807693,1627908809,b8e949,404
+b8e949,127.0.0.1,GET,http://localhost:8080/sockjs-node/info?t=1627908807693,1627908809,,404
