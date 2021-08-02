@@ -114,6 +114,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                     $qb->setParameter(':i', $id);
                 }
             }
+            
+            if (!empty($array['location']) && !empty($array['distance'])) {
+                $qb->leftJoin('u.cities', 'cities');
+                // select for calculate the distance between two cities
+                $qb->addSelect('((ACOS(SIN(:lat * PI() / 180) * SIN(cities.latitude * PI() / 180) + COS(:lat * PI() / 180) * COS(cities.latitude * PI() / 180) * COS((:lng - cities.longitude) * PI() / 180)) * 180 / PI()) * 60 * 1.1515 * 1.609344) as HIDDEN distance');
+                $qb->orderBy('distance');
+                $qb->having('distance < :perimeter');
+                $qb->setParameter('lat', $array['location'][0]);
+                $qb->setParameter('lng', $array['location'][1]);
+                $qb->setParameter(':perimeter', $array['distance']);
+            }
 
             $query = $qb->getQuery();
             return $query->execute();
