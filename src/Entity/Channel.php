@@ -17,22 +17,25 @@ class Channel
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups("message")
+     * @Groups({"channel", "message"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"channel", "message"})
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Message::class, mappedBy="channel", orphanRemoval=true)
+     * @Groups({"channel"})
      */
     private $messages;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"channel", "message"})
      */
     private $created_at;
 

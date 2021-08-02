@@ -24,7 +24,6 @@ return [
         '/user/list' => [[['_route' => 'admin_user_list', '_controller' => 'App\\Controller\\Admin\\UserController::list'], null, null, null, false, false, null]],
         '/request/list' => [[['_route' => 'admin_request_list', '_controller' => 'App\\Controller\\Admin\\UserRequestController::list'], null, null, null, false, false, null]],
         '/api/v1/availabilities' => [[['_route' => 'api_v1_availabilities', '_controller' => 'App\\Controller\\AvailabilityController::list'], null, null, null, false, false, null]],
-        '/channel' => [[['_route' => 'channel', '_controller' => 'App\\Controller\\ChannelController::getChannels'], null, null, null, false, false, null]],
         '/api/v1/cities' => [[['_route' => 'api_v1_cities', '_controller' => 'App\\Controller\\CityController::list'], null, null, null, false, false, null]],
         '/api/v1/departments' => [[['_route' => 'api_v1_departments', '_controller' => 'App\\Controller\\DepartmentController::list'], null, null, null, false, false, null]],
         '/api/v1/genders' => [[['_route' => 'api_v1_genders', '_controller' => 'App\\Controller\\GenderController::list'], null, null, null, false, false, null]],
@@ -87,7 +86,7 @@ return [
                         .'|(\\d+)(*:574)'
                     .')'
                 .')'
-                .'|/chat/([^/]++)(*:598)'
+                .'|/channel/(\\d+)(*:598)'
                 .'|/_error/(\\d+)(?:\\.([^/]++))?(*:634)'
             .')/?$}sDu',
     ],
@@ -120,7 +119,7 @@ return [
             [['_route' => 'api_v1_users_edit', '_controller' => 'App\\Controller\\UserController::edit'], ['id'], ['PUT' => 0, 'PATCH' => 1], null, false, true, null],
         ],
         574 => [[['_route' => 'api_v1_users_delete', '_controller' => 'App\\Controller\\UserController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
-        598 => [[['_route' => 'chat', '_controller' => 'App\\Controller\\ChannelController::chat'], ['user'], null, null, false, true, null]],
+        598 => [[['_route' => 'channel', '_controller' => 'App\\Controller\\ChannelController::chat'], ['id'], null, null, false, true, null]],
         634 => [
             [['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],

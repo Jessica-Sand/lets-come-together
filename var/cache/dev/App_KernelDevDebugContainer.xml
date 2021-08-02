@@ -7187,14 +7187,6 @@
         <argument key="channelRepository" type="service_closure" id="App\Repository\ChannelRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.o745I24" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator"/>
-      <argument type="collection">
-        <argument key="channel" type="service_closure" id=".errored..service_locator.o745I24.App\Entity\Channel"/>
-        <argument key="cookieJwtProvider" type="service_closure" id="App\Service\CookieJwtProvider"/>
-        <argument key="messageRepository" type="service_closure" id="App\Repository\MessageRepository"/>
-      </argument>
-    </service>
     <service id=".service_locator.PUGuonq" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -7252,7 +7244,7 @@
         <argument key="validator" type="service_closure" id="debug.validator"/>
       </argument>
     </service>
-    <service id=".service_locator.hbbr8GR" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Y7WrR0v" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\AdminController::add" type="service_closure" id=".service_locator.nWpr6Po"/>
@@ -7276,7 +7268,7 @@
         <argument key="App\Controller\Admin\UserRequestController::list" type="service_closure" id=".service_locator.Opiha9Q"/>
         <argument key="App\Controller\AvailabilityController::list" type="service_closure" id=".service_locator.aH.zvoW"/>
         <argument key="App\Controller\AvailabilityController::show" type="service_closure" id=".service_locator.aH.zvoW"/>
-        <argument key="App\Controller\ChannelController::chat" type="service_closure" id=".service_locator.o745I24"/>
+        <argument key="App\Controller\ChannelController::chat" type="service_closure" id=".service_locator.7KhOv2X"/>
         <argument key="App\Controller\ChannelController::getChannels" type="service_closure" id=".service_locator.7KhOv2X"/>
         <argument key="App\Controller\CityController::list" type="service_closure" id=".service_locator.PUGuonq"/>
         <argument key="App\Controller\CityController::show" type="service_closure" id=".service_locator.PUGuonq"/>
@@ -7325,7 +7317,7 @@
         <argument key="App\Controller\Admin\UserRequestController:list" type="service_closure" id=".service_locator.Opiha9Q"/>
         <argument key="App\Controller\AvailabilityController:list" type="service_closure" id=".service_locator.aH.zvoW"/>
         <argument key="App\Controller\AvailabilityController:show" type="service_closure" id=".service_locator.aH.zvoW"/>
-        <argument key="App\Controller\ChannelController:chat" type="service_closure" id=".service_locator.o745I24"/>
+        <argument key="App\Controller\ChannelController:chat" type="service_closure" id=".service_locator.7KhOv2X"/>
         <argument key="App\Controller\ChannelController:getChannels" type="service_closure" id=".service_locator.7KhOv2X"/>
         <argument key="App\Controller\CityController:list" type="service_closure" id=".service_locator.PUGuonq"/>
         <argument key="App\Controller\CityController:show" type="service_closure" id=".service_locator.PUGuonq"/>
@@ -7923,12 +7915,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.hbbr8GR"/>
+      <argument type="service" id=".service_locator.Y7WrR0v"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.hbbr8GR"/>
+      <argument type="service" id=".service_locator.Y7WrR0v"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface">
       <argument type="collection"/>
@@ -7951,7 +7943,6 @@
     <service id=".errored..service_locator.9UEvW4..App\Entity\Instrument" class="App\Entity\Instrument"/>
     <service id=".errored..service_locator.QsJ4pcn.App\Entity\Style" class="App\Entity\Style"/>
     <service id=".errored..service_locator.ch4Jgvl.App\Entity\User" class="App\Entity\User"/>
-    <service id=".errored..service_locator.o745I24.App\Entity\Channel" class="App\Entity\Channel"/>
     <service id=".errored..service_locator.4eDQUrY.App\Entity\User" class="App\Entity\User"/>
     <service id=".service_locator.XXv1IfR" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -8898,7 +8889,7 @@
     <service id="Swift_Transport" alias="swiftmailer.mailer.default.transport.spool"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.0GV1BZZ" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.hbbr8GR"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.Y7WrR0v"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8955,7 +8946,6 @@
     <service id=".service_locator.57eHIrG" alias=".service_locator.Opiha9Q"/>
     <service id=".service_locator.0zK2TSE" alias=".service_locator.aH.zvoW"/>
     <service id=".service_locator.VE1lfIk" alias=".service_locator.7KhOv2X"/>
-    <service id=".service_locator.sqSUZw3" alias=".service_locator.o745I24"/>
     <service id=".service_locator.4Eb3GdU" alias=".service_locator.PUGuonq"/>
     <service id=".service_locator.na_fRh7" alias=".service_locator.MHsiPbe"/>
     <service id=".service_locator.rRvH8XC" alias=".service_locator.azMdSSy"/>
