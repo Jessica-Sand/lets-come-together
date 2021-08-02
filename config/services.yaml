@@ -6,7 +6,7 @@
 parameters:
     images_directory: '%kernel.project_dir%/public/image'
 services:
-# using a service to upload a image and adding in a file
+    # using a service to upload a image and adding in a file
     App\Service\ImageUploader:
         arguments:
             $targetDirectory: '%image_directory%'
