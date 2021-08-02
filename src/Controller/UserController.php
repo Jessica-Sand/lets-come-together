@@ -12,6 +12,7 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\BrowserKit\Request as BrowserKitRequest;
 
 /**
  * @Route("/api/v1", name="api_v1_")
@@ -26,7 +27,21 @@ class UserController extends AbstractController
         return $this->json($userRepository->findAllActive(), 200, [], [
                 'groups' => 'User',
             ]);
+
     }
+
+    // /**
+    //  * @Route("/search", name="users_search", methods={"GET"})
+    //  */
+    // public function search(UserRepository $userRepository, Request $request): Response
+    // {
+    //     $jsonData = $request->getContent();
+    //     dd($jsonData);
+
+    //     // return $this->json($userRepository->advanceSearch(), 200, [], [
+    //     //     'groups' => 'User',
+    //     // ]);
+    // }
 
     /**
      * @Route("/users/{id}", name="users_show", methods={"GET"})

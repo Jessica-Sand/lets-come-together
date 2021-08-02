@@ -24,13 +24,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"User"})
+     * @Groups({"User", "message"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"User"})
+     * @Groups({"User", "message"})
      * @Assert\NotBlank(message="Veuiller renseigner votre Prénom")
      */
     private $firstname;
@@ -171,6 +171,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $cities;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="author")
+     */
+    private $messages;
+
     public function __construct()
     {
         $this->created_at = new DateTimeImmutable();
@@ -178,6 +183,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->Instruments = new ArrayCollection();
         $this->styles = new ArrayCollection();
         $this->status = true;
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -505,6 +511,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCities(?City $cities): self
     {
         $this->cities = $cities;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getAuthor() === $this) {
+                $message->setAuthor(null);
+            }
+        }
 
         return $this;
     }
