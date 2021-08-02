@@ -48,11 +48,13 @@ class City
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"User"})
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="float")
+     * @Groups({"User"})
      */
     private $longitude;
 
