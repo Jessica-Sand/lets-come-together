@@ -154,6 +154,6 @@ class __TwigTemplate_c1ad25bc1db05b5c0d3ff933be5573c0b26b7aebd4c824efc0bbe3603b2
     </ul>
 </div>
 {% endblock %}
-", "message/index.html.twig", "/var/www/html/Apo/letscometogether/templates/message/index.html.twig");
+", "message/index.html.twig", "/var/www/html/Apo/lets-do-music-together/templates/message/index.html.twig");
     }
 }

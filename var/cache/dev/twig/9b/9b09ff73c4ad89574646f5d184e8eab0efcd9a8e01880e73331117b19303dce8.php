@@ -378,6 +378,6 @@ class __TwigTemplate_bd2da93ccedc76cc940081264838eee47288614c72f39084fb33d4f42da
             });
         }
     </script>
-{% endblock %}", "channel/chat.html.twig", "/var/www/html/Apo/letscometogether/templates/channel/chat.html.twig");
+{% endblock %}", "channel/chat.html.twig", "/var/www/html/Apo/lets-do-music-together/templates/channel/chat.html.twig");
     }
 }

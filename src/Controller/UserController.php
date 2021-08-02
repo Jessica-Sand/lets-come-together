@@ -30,19 +30,6 @@ class UserController extends AbstractController
 
     }
 
-    // /**
-    //  * @Route("/search", name="users_search", methods={"GET"})
-    //  */
-    // public function search(UserRepository $userRepository, Request $request): Response
-    // {
-    //     $jsonData = $request->getContent();
-    //     dd($jsonData);
-
-    //     // return $this->json($userRepository->advanceSearch(), 200, [], [
-    //     //     'groups' => 'User',
-    //     // ]);
-    // }
-
     /**
      * @Route("/users/{id}", name="users_show", methods={"GET"})
      */
