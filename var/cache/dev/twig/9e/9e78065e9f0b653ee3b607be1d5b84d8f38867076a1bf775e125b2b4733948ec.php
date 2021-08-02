@@ -205,6 +205,6 @@ class __TwigTemplate_4b02b0e99870278efe548c9740858ff69181cdeef327d37fa7a0fb3f244
         </div>
     {% endif %}
 </div>  
-{% endblock %}", "channel/index.html.twig", "/var/www/html/Apo/letscometogether/templates/channel/index.html.twig");
+{% endblock %}", "channel/index.html.twig", "/var/www/html/Apo/lets-do-music-together/templates/channel/index.html.twig");
     }
 }
