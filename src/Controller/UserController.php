@@ -30,19 +30,6 @@ class UserController extends AbstractController
 
     }
 
-    // /**
-    //  * @Route("/search", name="users_search", methods={"GET"})
-    //  */
-    // public function search(UserRepository $userRepository, Request $request): Response
-    // {
-    //     $jsonData = $request->getContent();
-    //     dd($jsonData);
-
-    //     // return $this->json($userRepository->advanceSearch(), 200, [], [
-    //     //     'groups' => 'User',
-    //     // ]);
-    // }
-
     /**
      * @Route("/users/{id}", name="users_show", methods={"GET"})
      */
@@ -59,7 +46,6 @@ class UserController extends AbstractController
      */
     public function edit(User $user, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
     {
-        dd($request);
        $jsonData = $request->getContent();
 
        $user = $serializer->deserialize($jsonData, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
@@ -102,8 +88,12 @@ class UserController extends AbstractController
     public function advancedSearch(UserRepository $userRepository): Response
     {
         $array = $_GET;
-        $array['style'] = json_decode(urldecode($_GET['style']));
-        $array['instrument'] = json_decode(urldecode($_GET['instrument']));
+        if(!empty($array['style'])){
+            $array['style'] = json_decode(urldecode($_GET['style']));
+        }
+        if(!empty($array['instrument'])){
+            $array['instrument'] = json_decode(urldecode($_GET['instrument']));
+        }
         return $this->json($userRepository->detailSearch($array), 200, [], [
             'groups' => 'User',
         ]);
