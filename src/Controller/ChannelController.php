@@ -64,11 +64,11 @@ class ChannelController extends AbstractController
     // }
 
     /**
-     * @Route("/channel/{name}", name="channel", requirements={"id"="\d+"})
+     * @Route("/channel/{id}", id="channel", requirements={"id"="\d+"})
      */
-    public function chat($name, ChannelRepository $channelRepository): Response
+    public function chat($id, ChannelRepository $channelRepository): Response
     {
-        return $this->json($channelRepository->findOneBy(['name' => $name]), 200, [], [
+        return $this->json($channelRepository->findOneBy(['id' => $id]), 200, [], [
             'groups' => 'channel'
         ]);
     }

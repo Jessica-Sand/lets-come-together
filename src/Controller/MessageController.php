@@ -38,7 +38,7 @@ class MessageController extends AbstractController
         //     $data['channel'] = >  idSender+idReceiver
         //     $data['channel'] = >  idReceiver+idSender
         $channel = $channelRepository->findByUsers($data['senderId'],$data['receiverId']);
-        
+
         if (!$channel) { // if there is no channel with this name
             // need to create a channel
             $channel = new Channel();
@@ -47,6 +47,7 @@ class MessageController extends AbstractController
             $em->flush(); // saved it in the DB  
             //throw new AccessDeniedHttpException('Message have to be sent on a specific channel');
         }
+        
         $message = new Message(); // after validation, create the new message
         $message->setContent($content);
         $message->setChannel($channel);
