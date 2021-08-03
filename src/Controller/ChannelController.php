@@ -6,6 +6,7 @@ use App\Entity\Channel;
 use App\Repository\ChannelRepository;
 use App\Repository\MessageRepository;
 use App\Service\CookieJwtProvider;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\BrowserKit\Response as BrowserKitResponse;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -20,9 +21,9 @@ use Symfony\Component\WebLink\Link;
 class ChannelController extends AbstractController
 {
     /**
-     * @Route("/channel", name="channel")
+     * @Route("/channel", name="channel", methods={"POST"})
      */
-    public function getChannels(ChannelRepository $channelRepository): Response
+    public function getChannels(ChannelRepository $channelRepository, Request $request, EntityManagerInterface $em): Response
     {
         // $channels = $channelRepository->findAll();
         
@@ -30,9 +31,24 @@ class ChannelController extends AbstractController
         //     'channels' => $channels ?? [],
         // ]);
 
-        return $this->json($channelRepository->findAll(), 200, [], [
-            'groups' => 'message'
-        ]);
+        $data = \json_decode($request->getContent(), true); // deserialize the data posted and recovered
+        
+        // finding a channel name concatenate with the ids of 2 users
+        // $data['channel'] = >  $data['senderId'] + $data['receiverId'] exemple : 12 ou 21
+        //     $data['channel'] = >  idSender+idReceiver
+        //     $data['channel'] = >  idReceiver+idSender
+        $channel = $channelRepository->findByUsers($data['senderId'],$data['receiverId']);
+
+        if (!$channel) { // if there is no channel with this name
+            // need to create a channel
+            $channel = new Channel();
+            $channel->setName("".$data['senderId'].$data['receiverId']); 
+            $em->persist($channel);
+            $em->flush(); // saved it in the DB  
+            //throw new AccessDeniedHttpException('Message have to be sent on a specific channel');
+        }
+
+        return $this->json($channel->getId(), 200, []);
     }
 
     // /**
@@ -63,13 +79,13 @@ class ChannelController extends AbstractController
     //     return $response;
     // }
 
-    /**
-     * @Route("/channel/{id}", id="channel", requirements={"id"="\d+"})
-     */
-    public function chat($id, ChannelRepository $channelRepository): Response
-    {
-        return $this->json($channelRepository->findOneBy(['id' => $id]), 200, [], [
-            'groups' => 'channel'
-        ]);
-    }
+    // /**
+    //  * @Route("/channel/{id}", name="channel", requirements={"id"="\d+"}, methods={"GET"})
+    //  */
+    // public function chat($id, ChannelRepository $channelRepository): Response
+    // {
+    //     return $this->json($channelRepository->findOneBy(['id' => $id]), 200, [], [
+    //         'groups' => 'channel'
+    //     ]);
+    // }
 }   
