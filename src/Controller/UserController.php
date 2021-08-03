@@ -42,10 +42,10 @@ class UserController extends AbstractController
 
     /**
      * @Route("/users/{id}", name="users_edit", methods={"PUT|PATCH"})
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function edit(User $user, Request $request, SerializerInterface $serializer, ValidatorInterface $validator)
     {
+       $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
        $jsonData = $request->getContent();
 
        $user = $serializer->deserialize($jsonData, User::class, 'json', [AbstractNormalizer::OBJECT_TO_POPULATE => $user]);
@@ -69,10 +69,10 @@ class UserController extends AbstractController
 
     /**
      * @Route("/users/{id}", name="users_delete", methods={"DELETE"}, requirements={"id" = "\d+"})
-     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function delete(User $user): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
