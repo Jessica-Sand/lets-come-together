@@ -63,7 +63,7 @@ class MessageController extends AbstractController
         ]);
 
         $update = new Update( // creation of a new update
-            sprintf('http://localhost:8080/message', // the topic with the id of the channel
+            sprintf('http://localhost:8080/chat/%d', // the topic with the id of the channel
                 $channel->getId()),
                 $jsonMessage, // pass the serializer message in content value
                 true // update private
