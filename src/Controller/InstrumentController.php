@@ -31,4 +31,18 @@ class InstrumentController extends AbstractController
             'groups' => 'instruments_users'
         ]);
     }
+
+    /**
+     * @Route("/icon/{id}", name="base64", methods={"GET"})
+     */
+    public function base($id, InstrumentRepository $instrumentRepository)
+    {
+        $currentInstrument = $instrumentRepository->findOneBy(["id" => $id]);
+        $icon = $currentInstrument->getIcon();
+        $path = $_ENV['UPLOAD_FOLDER'] . '/' . $icon;
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        return $this->json($base64);
+    }
 }
