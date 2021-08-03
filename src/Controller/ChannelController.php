@@ -21,6 +21,19 @@ use Symfony\Component\WebLink\Link;
 class ChannelController extends AbstractController
 {
     /**
+     * @Route("/channel/{id}", name="channel_id", requirements={"id"="\d+"}, methods={"GET"})
+     */
+    public function getChannelMessages($id, ChannelRepository $channelRepository, MessageRepository $messageRepository): Response
+    {
+
+        $messages = $messageRepository->findAll(['channel_id' => $id]);
+
+        return $this->json($messages, 200, [], [
+            'groups' => 'channel'
+        ]);
+    }
+
+    /**
      * @Route("/channel", name="channel", methods={"POST"})
      */
     public function getChannels(ChannelRepository $channelRepository, Request $request, EntityManagerInterface $em): Response
@@ -79,13 +92,5 @@ class ChannelController extends AbstractController
     //     return $response;
     // }
 
-    // /**
-    //  * @Route("/channel/{id}", name="channel", requirements={"id"="\d+"}, methods={"GET"})
-    //  */
-    // public function chat($id, ChannelRepository $channelRepository): Response
-    // {
-    //     return $this->json($channelRepository->findOneBy(['id' => $id]), 200, [], [
-    //         'groups' => 'channel'
-    //     ]);
-    // }
+    
 }   
