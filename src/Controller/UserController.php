@@ -110,4 +110,5 @@ class UserController extends AbstractController
             'groups' => 'User',
         ]);
     }
+
 }
