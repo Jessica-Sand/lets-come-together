@@ -30,7 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"User", "message"})
+     * @Groups({"User"})
      * @Assert\NotBlank(message="Veuiller renseigner votre Prénom")
      */
     private $firstname;
@@ -44,7 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
-     * @Groups({"User", "instruments_users", "Styles_User", "Departments_Users"})
+     * @Groups({"User", "instruments_users", "Styles_User", "Departments_Users", "channel"})
      * @Assert\NotBlank(message="Veuillez renseiger votre Pseudonyme")
      */
     private $pseudo;
