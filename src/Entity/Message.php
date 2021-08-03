@@ -22,7 +22,7 @@ class Message
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("message")
+     * @Groups({"channel", "message"})
      */
     private $content;
 
@@ -33,14 +33,14 @@ class Message
 
     /**
      * @ORM\ManyToOne(targetEntity=Channel::class, inversedBy="messages")
-     * @Groups("message")
+     * @Groups({"message"})
      */
     private $channel;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="messages")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups("message")
+     * @Groups({"channel", "message"})
      */
     private UserInterface $author;
 
