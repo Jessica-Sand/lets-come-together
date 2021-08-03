@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\WebLink\Link;
 
+/**
+ * @Route("/api/v1", name="api_v1_")
+ */
 class ChannelController extends AbstractController
 {
     /**
@@ -61,11 +64,11 @@ class ChannelController extends AbstractController
     // }
 
     /**
-     * @Route("/channel/{id}", name="channel", requirements={"id"="\d+"})
+     * @Route("/channel/{name}", name="channel", requirements={"id"="\d+"})
      */
-    public function chat($id, ChannelRepository $channelRepository): Response
+    public function chat($name, ChannelRepository $channelRepository): Response
     {
-        return $this->json($channelRepository->findOneBy(['id' => $id]), 200, [], [
+        return $this->json($channelRepository->findOneBy(['name' => $name]), 200, [], [
             'groups' => 'channel'
         ]);
     }
