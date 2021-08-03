@@ -26,7 +26,7 @@ class ChannelController extends AbstractController
     public function getChannelMessages($id, ChannelRepository $channelRepository, MessageRepository $messageRepository): Response
     {
 
-        $messages = $messageRepository->findAll(['channel_id' => $id]);
+        $messages = $messageRepository->findBy(['channel' => $id]);
 
         return $this->json($messages, 200, [], [
             'groups' => 'channel'
