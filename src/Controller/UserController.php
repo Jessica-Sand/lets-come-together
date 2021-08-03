@@ -69,6 +69,7 @@ class UserController extends AbstractController
 
     /**
      * @Route("/users/{id}", name="users_delete", methods={"DELETE"}, requirements={"id" = "\d+"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function delete(User $user): Response
     {
