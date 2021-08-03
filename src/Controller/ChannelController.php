@@ -21,38 +21,52 @@ class ChannelController extends AbstractController
      */
     public function getChannels(ChannelRepository $channelRepository): Response
     {
-        $channels = $channelRepository->findAll();
+        // $channels = $channelRepository->findAll();
+        
+        // return $this->render('channel/index.html.twig', [
+        //     'channels' => $channels ?? [],
+        // ]);
 
-        return $this->render('channel/index.html.twig', [
-            'channels' => $channels ?? [],
+        return $this->json($channelRepository->findAll(), 200, [], [
+            'groups' => 'message'
         ]);
     }
 
-    /**
-     * @Route("/chat/{user}", name="chat", requirements={"id"="\d+"})
-     */
-    public function chat(Request $request, Channel $channel, MessageRepository $messageRepository, CookieJwtProvider $cookieJwtProvider): Response
-    {
-        $messages = $messageRepository->findBy([
-            'channel' => $channel
-        ], ['created_at' => 'ASC']);
+    // /**
+    //  * @Route("/chat/{user}", name="chat", requirements={"id"="\d+"})
+    //  */
+    // public function chat(Request $request, Channel $channel, MessageRepository $messageRepository, CookieJwtProvider $cookieJwtProvider): Response
+    // {
+    //     $messages = $messageRepository->findBy([
+    //         'channel' => $channel
+    //     ], ['created_at' => 'ASC']);
 
-        $hubUrl = $this->getParameter('mercure.default_hub'); // Mercure automatically define this parameter
-        $this->addLink($request, new Link('mercure', $hubUrl));
+    //     $hubUrl = $this->getParameter('mercure.default_hub'); // Mercure automatically define this parameter
+    //     $this->addLink($request, new Link('mercure', $hubUrl));
 
-         $response = $this->render('channel/chat.html.twig', [
-            'channel' => $channel,
-            'messages' => $messages
-        ]);
+    //      $response = $this->render('channel/chat.html.twig', [
+    //         'channel' => $channel,
+    //         'messages' => $messages
+    //     ]);
         
-        $response->headers->setCookie(
-            Cookie::create(
-                'mercureAuthorization',
-                $cookieJwtProvider($channel),
-                new \DateTime('+1day'),
-                '/.well-known/mercure'
-            )
-        );
-        return $response;
+    //     $response->headers->setCookie(
+    //         Cookie::create(
+    //             'mercureAuthorization',
+    //             $cookieJwtProvider($channel),
+    //             new \DateTime('+1day'),
+    //             '/.well-known/mercure'
+    //         )
+    //     );
+    //     return $response;
+    // }
+
+    /**
+     * @Route("/channel/{id}", name="channel", requirements={"id"="\d+"})
+     */
+    public function chat($id, ChannelRepository $channelRepository): Response
+    {
+        return $this->json($channelRepository->findOneBy(['id' => $id]), 200, [], [
+            'groups' => 'channel'
+        ]);
     }
 }   
