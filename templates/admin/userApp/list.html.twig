@@ -39,7 +39,11 @@
 						<td class="col-2">{{user.id}}</td>
 						<td class="col-5">{{user.firstname}} {{user.lastname}}</td>
                         <td>
-							{{ user.roles ? user.roles|json_encode : '' }}
+						{% if user.roles == ["ROLE_SUPER_ADMIN","ROLE_ADMIN"] %}
+							<span class="badge bg-primary mt-2">Super-Admin</span>
+						{% else %}
+							<span class="badge bg-success mt-2">Admin</span>
+						{% endif %}
                         </td>
 						<td>
 							<a href="{{ path('admin_edit', {id: user.id}) }}">
