@@ -18,7 +18,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-
+/**
+ * @Route("/api/v1", name="api_v1_")
+ */
 class MessageController extends AbstractController
 {
     /**
