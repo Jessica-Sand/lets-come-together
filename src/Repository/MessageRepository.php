@@ -19,6 +19,25 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
 
+    /**
+    * Method to find all channels and content message from an author
+    */
+    
+    public function findByAuthor($author_id)
+    {
+        // SELECT channel_id, content
+        // From message
+        // WHERE author_id = 28
+
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.author = :author')
+            ->setParameter('author', $author_id)
+            ->orderBy('m.created_at', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Message[] Returns an array of Message objects
     //  */
