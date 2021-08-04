@@ -190,7 +190,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->updated_at = new DateTime();
         $this->Instruments = new ArrayCollection();
         $this->styles = new ArrayCollection();
-        $this->status = true;
         $this->messages = new ArrayCollection();
     }
 
