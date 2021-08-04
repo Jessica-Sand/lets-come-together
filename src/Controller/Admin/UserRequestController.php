@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\UserRequest;
 use App\Repository\UserRequestRepository;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,6 +49,27 @@ class UserRequestController extends AbstractController
             return $this->redirectToRoute('admin_request_list');
         } else {
             return new Response('Action interdite', 403);
+        }
+    }
+
+    /**
+     * @Route("/{id}/status", name="status_change")
+     *
+     * Function for change the status of the UserRequest in the DataBase
+     */
+    public function statusChange(UserRequest $userRequest)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if ($userRequest->getStatus() == 1) {
+            $userRequest->setStatus(0);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_request_list');
+        }else{
+            $userRequest->setStatus(1);
+            $em->flush();
+
+            return $this->redirectToRoute('admin_request_list');
         }
     }
 }

@@ -20,7 +20,18 @@
         {% for request in requests %}
             <div class="card text-center border border-dark">
                 <div class="card-header">
-                    {{ request.firstname }} - {{ request.email }}
+                        <div class="text-start">
+                            {{ request.firstname }} - {{ request.email }}
+                        </div>
+                        <div class="text-end">{% if request.status == 1 %}
+                        <a href="{{ path('admin_request_status_change', {id:request.id}) }}">
+                        <button type="button" class="btn btn-outline-success col-2">En attente</button>
+                        </a>
+                        {% else %}
+                        <a href="{{ path('admin_request_status_change', {id:request.id}) }}">
+                        <button type="button" class="btn btn-danger col-2">Valider</button>
+                        </a>
+                        {% endif %}</div>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ request.subject }}</h5>
