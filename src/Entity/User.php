@@ -179,6 +179,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $messages;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $EmailToken;
+
     public function __construct()
     {
         $this->created_at = new DateTimeImmutable();
@@ -544,6 +549,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $message->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmailToken(): ?string
+    {
+        return $this->EmailToken;
+    }
+
+    public function setEmailToken(?string $EmailToken): self
+    {
+        $this->EmailToken = $EmailToken;
 
         return $this;
     }
