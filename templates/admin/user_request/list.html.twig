@@ -18,19 +18,17 @@
 
 	<div class="container">
         {% for request in requests %}
-            <div class="card text-center bg-secondary">
+            <div class="card text-center border border-secondary">
                 <div class="card-header">
                     <div class="text-start">
                         {{ request.firstname }} - {{ request.email }}
                     </div>
-                    <div class="text-end">{% if request.status == 1 %}
+                    <div class="text-end">{% if request.status == 0 %}
                         <a href="{{ path('admin_request_status_change', {id:request.id}) }}">
-                        <button type="button" class="btn btn-outline-success col-2">En attente</button>
+                        <button type="button" class="btn btn-outline-secondary col-2">En attente</button>
                         </a>
                         {% else %}
-                        <a href="{{ path('admin_request_status_change', {id:request.id}) }}">
-                        <button type="button" class="btn btn-secondary col-2">Valider</button>
-                        </a>
+                        <button type="button" class="btn btn-success col-2">Validé</button>
                         {% endif %}
                     </div>
                 </div>
@@ -42,6 +40,23 @@
                 </div>
             </div>
             <div class="my-5"></div>
+
+
+            {# <div class="card mb-3 border border-secondary">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                    <img src="{{ asset("uploads/images/Logo_white.png") }}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p></h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        
+                    </div>
+                    </div>
+                </div>
+                </div> #}
+
         {% endfor %}
 	</div>
 {% endblock %}

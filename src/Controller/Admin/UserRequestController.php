@@ -9,7 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 
 /**
  * @Route("request", name="admin_request_")
@@ -17,13 +19,20 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class UserRequestController extends AbstractController
 {
+    private $mailer;
+
+    public function __construct(MailerInterface $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
     /**
      * @Route("/list", name="list")
      */
     public function list(UserRequestRepository $userRequestRepository): Response
     {
         return $this->render('admin/user_request/list.html.twig', [
-            'requests' => $userRequestRepository->findAll(),
+            'requests' => $userRequestRepository->findAllbyDate(),
         ]);
     }
 
@@ -60,14 +69,20 @@ class UserRequestController extends AbstractController
     public function statusChange(UserRequest $userRequest)
     {
         $em = $this->getDoctrine()->getManager();
-        if ($userRequest->getStatus() == 1) {
-            $userRequest->setStatus(0);
-            $em->flush();
-
-            return $this->redirectToRoute('admin_request_list');
-        }else{
+        if ($userRequest->getStatus() == 0) {
             $userRequest->setStatus(1);
             $em->flush();
+
+            $email = (new TemplatedEmail())
+            ->from('letscometogether.apo@gmail.com')
+            ->to($userRequest->getEmail())
+            ->subject('Reponse à votre message à l\'administrateur')
+
+            // path of the Twig template to render
+            ->htmlTemplate('emails/request.html.twig')
+            ;
+
+            $this->mailer->send($email);
 
             return $this->redirectToRoute('admin_request_list');
         }
