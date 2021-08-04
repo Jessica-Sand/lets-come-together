@@ -18,7 +18,7 @@
 
 	<div class="container">
         {% for request in requests %}
-            <div class="card text-center border border-secondary">
+            <div class="card text-center border border-success">
                 <div class="card-header">
                     <div class="text-start">
                         {{ request.firstname }} - {{ request.email }}
@@ -42,10 +42,10 @@
             <div class="my-5"></div>
 
 
-            {# <div class="card mb-3 border border-secondary">
+            <div class="card mb-3 border border-secondary">
                 <div class="row g-0">
                     <div class="col-md-4">
-                    <img src="{{ asset("uploads/images/Logo_white.png") }}" class="img-fluid rounded-start" alt="...">
+                    <img src="{{ asset("uploads/images/Logo_white.png") }}" class="img-fluid rounded-start" alt="logo" style="width:60%">
                     </div>
                     <div class="col-md-8">
                     <div class="card-body">
@@ -55,7 +55,7 @@
                     </div>
                     </div>
                 </div>
-                </div> #}
+                </div>
 
         {% endfor %}
 	</div>
