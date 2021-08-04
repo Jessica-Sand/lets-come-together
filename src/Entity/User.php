@@ -95,7 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $bio;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @Groups({"User"})
      */
     private $picture;
@@ -179,13 +179,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $messages;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $EmailToken;
+
     public function __construct()
     {
         $this->created_at = new DateTimeImmutable();
         $this->updated_at = new DateTime();
         $this->Instruments = new ArrayCollection();
         $this->styles = new ArrayCollection();
-        $this->status = true;
+        $this->status = false;
         $this->messages = new ArrayCollection();
     }
 
@@ -544,6 +549,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $message->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmailToken(): ?string
+    {
+        return $this->EmailToken;
+    }
+
+    public function setEmailToken(?string $EmailToken): self
+    {
+        $this->EmailToken = $EmailToken;
 
         return $this;
     }

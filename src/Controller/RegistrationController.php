@@ -7,6 +7,8 @@ use App\Form\RegistrationFormType;
 use App\Repository\InstrumentRepository;
 use App\Repository\DepartmentRepository;
 use App\Repository\StyleRepository;
+use App\Repository\UserRepository;
+use App\Service\Mailer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,15 +19,11 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegistrationController extends AbstractController
 {
-    private $departmentRepository;
-    private $genreRepository;
-    private $instrumentRepository;
+    private $mailer;
 
-    public function __construct(DepartmentRepository $department, StyleRepository $genre, InstrumentRepository $instrument)
+    public function __construct(Mailer $mailer)
     {
-        $this->departmentRepository = $department;
-        $this->genreRepository = $genre;
-        $this->instrumentRepository = $instrument;
+        $this->mailer = $mailer;
     }
 
     /**
@@ -48,9 +46,12 @@ class RegistrationController extends AbstractController
         }else{
             // dd($user);
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
+            $user->setEmailToken($this->generateToken());
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->mailer->sendEmail($user->getEmail(), $user->getEmailToken());
         
             return $this->json(
                 [
@@ -60,6 +61,35 @@ class RegistrationController extends AbstractController
             );
              
             
+        }
+    }
+
+    /**
+     * @return string
+     */
+    private function generateToken()
+    {
+        $token = openssl_random_pseudo_bytes(16);
+        
+        return bin2hex($token);
+    }
+
+    /**
+     * @route("/confirm-account/{token}", name="confirm-account")
+     *
+     * @return void
+     */
+    public function confirmAccount($token, UserRepository $userRepository)
+    {
+        $user = $userRepository->findOneBy(['EmailToken' => $token]);
+
+        if($user){
+            $user->setEmailToken(null);
+            $user->setStatus(true);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+
+            return $this->redirect('https://symfony.com/doc/2.6/cookbook/routing/redirect_trailing_slash.html');
         }
     }
 }

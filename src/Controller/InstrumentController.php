@@ -12,15 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class InstrumentController extends AbstractController
 {
-    /**
-     * @Route("/instruments", name="instruments", methods={"GET"})
-     */
-    public function list(InstrumentRepository $instrumentRepository): Response
-    {
-        return $this->json($instrumentRepository->findAll(), 200, [], [
-            'groups' => 'instruments'
-        ]);
-    }
 
     /**
      * @Route("/instruments/{id}", name="instruments_users", methods={"GET"})
@@ -33,16 +24,27 @@ class InstrumentController extends AbstractController
     }
 
     /**
-     * @Route("/icon/{id}", name="base64", methods={"GET"})
+     * @Route("/instruments", name="instruments", methods={"GET"})
      */
-    public function base($id, InstrumentRepository $instrumentRepository)
+    public function base(InstrumentRepository $instrumentRepository)
     {
-        $currentInstrument = $instrumentRepository->findOneBy(["id" => $id]);
-        $icon = $currentInstrument->getIcon();
-        $path = $_ENV['UPLOAD_FOLDER'] . '/' . $icon;
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-        return $this->json($base64);
+        $allInstruments = [];
+
+        $instruments = $instrumentRepository->findAll();
+        
+        foreach($instruments as$key => $currentInstrument ) {
+            $icon = $currentInstrument->getIcon();
+            $path = $_ENV['UPLOAD_FOLDER'] . '/' . $icon;
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+            $allInstruments[$key] = [
+                'id' => $currentInstrument->getId(),
+                'name' => $currentInstrument->getName(),
+                'icon' => $base64
+            ];
+        }
+        return $this->json($allInstruments);
     }
 }
