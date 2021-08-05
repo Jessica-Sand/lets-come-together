@@ -31,20 +31,34 @@
                     </div>
                     <div class="text-start">
                         <div>
-                            Nom : {{ request.firstname }}
+                            <p class="fw-bold">
+                                Nom :
+                            <small class="fw-lighter">{{ request.firstname }}</small>
+                            </p>
                         </div>
                         <div>
-                            e-mail : {{ request.email }}
+                            <p class="fw-bold">
+                                e-mail : <small class="fw-lighter">{{ request.email }}</small>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="card-body text-center ">
-                    <h5 class="card-title">{{ request.subject }}</h5>
+                <div class="card-body">
+                    <h5 class="card-title text-center">
+                        Sujet : {{ request.subject }}
+                    </h5>
                     <hr class="mt-3" style="margin-bottom: 2em">
-                    <p class="card-text">{{ request.message }}</p>
-                    <a href="{{ path('admin_request_delete', {id:request.id, token:csrf_token('delete-request')}) }}">
-                        <button type="button" class="btn btn-outline-danger" style="margin-left: 70em">Supprimer</button>
-                    </a>
+                    <p class="card-text">
+                        Message : 
+                            <p class="mt-2">
+                            {{ request.message }}
+                            </p>
+                    </p>
+                    <div class="text-end">
+                        <a href="{{ path('admin_request_delete', {id:request.id, token:csrf_token('delete-request')}) }}">
+                            <button type="button" class="btn btn-danger">Supprimer</button>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="my-5"></div>
