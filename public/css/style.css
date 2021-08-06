@@ -1,0 +1,23 @@
+body {
+    background-color: #b0a9a9;
+}
+.bg-dark {
+    background-color: #232323!important;
+}
+.container .table {
+    background-color: #454040;
+}
+#back-table {
+    background-color: #454040;
+}
+#connection {
+    background-color: #2dbf84;
+    border-color: #2dbf84;
+}
+.btn-success {
+    background-color: #2dbf84;
+    border-color: #2dbf84;
+}
+h1 {
+    font-family: 'Montserrat', sans-serif;
+}

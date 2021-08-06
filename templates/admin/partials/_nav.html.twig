@@ -36,12 +36,12 @@
 					</li>
 					<li class="nav-item col-5">
 						<a class="nav-link{% if currentRoute == 'admin_request_list' %} active{% endif %}" href="{{ path('admin_request_list') }}">
-                        Requetes-Utilisateur
+                        Messages
                         </a>
 					</li>
 					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 					<a href="{{ path('app_logout') }}">
-						<button type="button" class="btn btn-danger">Déconnexion</button>
+						<button type="button" class="btn btn-danger" id="connection">Déconnexion</button>
 					</a>
 					{% endif %}
 				</ul>
