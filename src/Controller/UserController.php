@@ -68,7 +68,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}", name="users_delete", methods={"DELETE"}, requirements={"id" = "\d+"})
+     * @Route("/users/{id}", name="users_delete", methods={"DELETE"})
      */
     public function delete(User $user): Response
     {
