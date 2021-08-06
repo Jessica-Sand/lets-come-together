@@ -64,7 +64,7 @@ class MessageController extends AbstractController
         ]);
 
         $update = new Update( // creation of a new update
-            sprintf('http://ec2-3-238-142-112.compute-1.amazonaws.com/api/v1/channel/%d', // the topic with the id of the channel
+            sprintf('http://ec2-52-54-175-183.compute-1.amazonaws.com/api/v1/channel/%d', // the topic with the id of the channel
                 $channel->getId()),
                 $jsonMessage, // pass the serializer message in content value
         );
