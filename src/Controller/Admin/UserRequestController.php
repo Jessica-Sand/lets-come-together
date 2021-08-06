@@ -19,20 +19,13 @@ use Symfony\Component\Mailer\MailerInterface;
  */
 class UserRequestController extends AbstractController
 {
-    private $mailer;
-
-    public function __construct(MailerInterface $mailer)
-    {
-        $this->mailer = $mailer;
-    }
-
     /**
      * @Route("/list", name="list")
      */
     public function list(UserRequestRepository $userRequestRepository): Response
     {
         return $this->render('admin/user_request/list.html.twig', [
-            'requests' => $userRequestRepository->findAllbyDate(),
+            'requests' => $userRequestRepository->findAll(),
         ]);
     }
 
