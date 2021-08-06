@@ -65,6 +65,18 @@ class ChannelController extends AbstractController
     }
 
     // /**
+    //  * @Route("/channel/message/{author_id}", name="channel_author_message", methods={"GET"})
+    //  */
+    // public function getAllChannelAuthorMessage($author_id, MessageRepository $messageRepository)
+    // {
+    //     $messages = $messageRepository->findBy(['author' => $author_id], ['channel' => $channel_id]);
+
+    //     return $this->json($messages, 200, [], [
+    //         'groups' => 'message'
+    //     ]);
+    // }
+
+    // /**
     //  * @Route("/chat/{user}", name="chat", requirements={"id"="\d+"})
     //  */
     // public function chat(Request $request, Channel $channel, MessageRepository $messageRepository, CookieJwtProvider $cookieJwtProvider): Response
