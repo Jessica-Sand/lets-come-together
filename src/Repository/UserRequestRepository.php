@@ -19,6 +19,18 @@ class UserRequestRepository extends ServiceEntityRepository
         parent::__construct($registry, UserRequest::class);
     }
 
+    /**
+     * Method to find all request ordered by newest
+     */
+    public function findAllbyDate()
+    {
+        return $this->createQueryBuilder('d')
+            ->orderBy('d.created_at', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return UserRequest[] Returns an array of UserRequest objects
     //  */

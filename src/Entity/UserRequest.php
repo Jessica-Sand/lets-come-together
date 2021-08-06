@@ -53,9 +53,15 @@ class UserRequest
      */
     private $updated_at;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $status;
+
     public function __construct()
     {
         $this->created_at = new DateTimeImmutable();
+        $this->status = true;
     }
 
     public function getId(): ?int
@@ -131,6 +137,18 @@ class UserRequest
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
