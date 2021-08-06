@@ -25,7 +25,7 @@ class UserRequestController extends AbstractController
     public function list(UserRequestRepository $userRequestRepository): Response
     {
         return $this->render('admin/user_request/list.html.twig', [
-            'requests' => $userRequestRepository->findAll(),
+            'requests' => $userRequestRepository->findAllbyDate(),
         ]);
     }
 
