@@ -61,7 +61,7 @@ class UserRequest
     public function __construct()
     {
         $this->created_at = new DateTimeImmutable();
-        $this->status = true;
+        $this->status = false;
     }
 
     public function getId(): ?int
