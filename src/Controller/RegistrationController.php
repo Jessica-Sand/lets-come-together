@@ -89,7 +89,7 @@ class RegistrationController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
 
-            return $this->redirect('https://symfony.com/doc/2.6/cookbook/routing/redirect_trailing_slash.html');
+            return $this->redirect('http://localhost:8080/');
         }
     }
 }
