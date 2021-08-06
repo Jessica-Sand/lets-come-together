@@ -68,9 +68,9 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}", name="users_delete", methods={"DELETE"})
+     * @Route("/users/{id}", name="users_delete", methods={"DELETE"}, requirements={"id" = "\d+"})
      */
-    public function delete(User $user)
+    public function delete(User $user): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
             $entityManager = $this->getDoctrine()->getManager();
